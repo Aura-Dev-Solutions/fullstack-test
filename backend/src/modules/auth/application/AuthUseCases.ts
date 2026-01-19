@@ -7,10 +7,10 @@ import type {
   TokenGenerator,
   SessionRepository,
   AuthToken,
-} from '../domain'
-import type { OrganizationRepository } from '@modules/organization/domain'
-import type { WorkflowRepository } from '@modules/workflow/domain'
-import type { RefreshTokenService } from "../infrastructure"
+} from "../domain";
+import type { OrganizationRepository } from "@modules/organization/domain";
+import type { WorkflowRepository } from "@modules/workflow/domain";
+import type { RefreshTokenService } from "../infrastructure";
 
 export class AuthUseCases {
   constructor(
@@ -90,6 +90,9 @@ export class AuthUseCases {
       user.password,
     );
     if (!isValidPassword) {
+      console.warn("[AUTH] Invalid login attempt", {
+        email: data.email,
+      });
       throw new Error("Invalid credentials");
     }
 
@@ -103,6 +106,11 @@ export class AuthUseCases {
       userId: user.id,
       refreshTokenHash: refresh.hash,
       expiresAt: refresh.expiresAt,
+    });
+
+    console.info("[AUTH] User logged in:", {
+      user: user.id,
+      organization: user.organizationId,
     });
 
     return {
@@ -125,6 +133,7 @@ export class AuthUseCases {
     const session =
       await this.sessionRepository.findActiveByRefreshTokenHash(hash);
     if (!session) {
+      console.warn("[AUTH] Invalid refresh token attempt");
       throw new Error("Invalid refresh token");
     }
 
@@ -145,6 +154,10 @@ export class AuthUseCases {
     });
     const token = this.tokenGenerator.generate(user.id, user.organizationId);
 
+    console.info("[AUTH] Session refreshed", {
+      userId: user.id,
+    });
+
     return {
       token,
       refreshToken: newRefresh.token,
@@ -158,6 +171,9 @@ export class AuthUseCases {
     if (!session) {
       return;
     }
+    console.info('[AUTH] User logged out', {
+      userId: session.userId,
+    });
     await this.sessionRepository.revoke(session.id);
   }
 }

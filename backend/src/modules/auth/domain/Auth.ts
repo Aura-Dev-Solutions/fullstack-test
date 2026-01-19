@@ -31,6 +31,7 @@ export interface AuthResponse {
     organizationId: string | null;
   };
   token: AuthToken;
+  refreshToken: string;
 }
 
 export interface AuthSession {

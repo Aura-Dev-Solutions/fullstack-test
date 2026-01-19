@@ -6,6 +6,7 @@ import { OrganizationEntity } from '@modules/organization/infrastructure'
 import { ContactEntity } from '@modules/contact/infrastructure'
 import { WorkflowEntity, StageEntity } from '@modules/workflow/infrastructure'
 import { DealEntity } from '@modules/deal/infrastructure'
+import { SessionEntity } from '@modules/auth/infrastructure'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -23,6 +24,7 @@ export const AppDataSource = new DataSource({
     WorkflowEntity,
     StageEntity,
     DealEntity,
+    SessionEntity,
   ],
   migrations: ['src/shared/infrastructure/database/migrations/*.ts'],
   subscribers: [],

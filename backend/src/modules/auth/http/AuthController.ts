@@ -19,7 +19,14 @@ export class AuthController {
 
     try {
       const result = await this.authUseCases.register({ name, email, password })
-      res.status(201).json(result)
+      res.cookie('refreshToken', result.refreshToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path : '/api/auth/refresh',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      })
+      res.status(200).json({ user : result.user, token : result.token })
     } catch (error) {
       if (error instanceof Error && error.message.includes('already exists')) {
         res.status(409).json({ error: error.message })
@@ -39,7 +46,14 @@ export class AuthController {
 
     try {
       const result = await this.authUseCases.login({ email, password })
-      res.json(result)
+      res.cookie('refreshToken', result.refreshToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path : '/api/auth/refresh',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      })
+      res.status(200).json({ user : result.user, token : result.token })
     } catch (error) {
       if (error instanceof Error && error.message.includes('Invalid credentials')) {
         res.status(401).json({ error: 'Invalid credentials' })

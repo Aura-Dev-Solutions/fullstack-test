@@ -5,9 +5,11 @@ import type {
   AuthRepository,
   PasswordHasher,
   TokenGenerator,
+  SessionRepository,
 } from '../domain'
 import type { OrganizationRepository } from '@modules/organization/domain'
 import type { WorkflowRepository } from '@modules/workflow/domain'
+import type { RefreshTokenService } from "../infrastructure"
 
 export class AuthUseCases {
   constructor(
@@ -15,7 +17,9 @@ export class AuthUseCases {
     private readonly passwordHasher: PasswordHasher,
     private readonly tokenGenerator: TokenGenerator,
     private readonly organizationRepository: OrganizationRepository,
-    private readonly workflowRepository: WorkflowRepository
+    private readonly workflowRepository: WorkflowRepository,
+    private readonly sessionRepository: SessionRepository,
+    private readonly refreshTokenService: RefreshTokenService
   ) {}
 
   async register(data: RegisterDTO): Promise<AuthResponse> {
@@ -54,6 +58,13 @@ export class AuthUseCases {
     })
 
     const token = this.tokenGenerator.generate(user.id, organization.id)
+    
+    const refresh = this.refreshTokenService.generate();
+    await this.sessionRepository.create({
+      userId: user.id,
+      refreshTokenHash: refresh.hash,
+      expiresAt: refresh.expiresAt,
+    })
 
     return {
       user: {
@@ -63,6 +74,7 @@ export class AuthUseCases {
         organizationId: user.organizationId,
       },
       token,
+      refreshToken: refresh.token,
     }
   }
 
@@ -85,6 +97,12 @@ export class AuthUseCases {
     }
 
     const token = this.tokenGenerator.generate(user.id, user.organizationId)
+    const refresh = this.refreshTokenService.generate()
+    await this.sessionRepository.create({
+      userId: user.id,
+      refreshTokenHash: refresh.hash,
+      expiresAt: refresh.expiresAt,
+    })
 
     return {
       user: {
@@ -94,6 +112,7 @@ export class AuthUseCases {
         organizationId: user.organizationId,
       },
       token,
+      refreshToken: refresh.token,
     }
   }
 }

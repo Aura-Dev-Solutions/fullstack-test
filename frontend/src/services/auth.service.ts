@@ -42,4 +42,6 @@ export const authService = {
   removeToken: () => localStorage.removeItem('token'),
 
   isAuthenticated: () => !!localStorage.getItem('token'),
+
+  logout: () => api.post<void>('/auth/logout'),
 }

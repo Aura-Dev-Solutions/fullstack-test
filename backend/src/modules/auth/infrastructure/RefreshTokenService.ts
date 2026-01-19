@@ -21,12 +21,12 @@ export class RefreshTokenService {
       expiresAt,
     };
   }
+  
+  hash(token: string): string {
+    return crypto.createHash("sha256").update(token).digest("hex");
+  }
 
   getMaxAgeMs(): number {
     return this.expiresInMs;
-  }
-
-  hash(token: string): string {
-    return crypto.createHash("sha256").update(token).digest("hex");
   }
 }

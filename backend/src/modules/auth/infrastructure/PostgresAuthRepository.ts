@@ -13,6 +13,14 @@ export class PostgresAuthRepository implements AuthRepository {
     return this.toAuthUser(entity)
   }
 
+  async findById(id: string): Promise<AuthUser | null> {
+    const entity = await this.repository.findOne({ where: { id } })
+    if (!entity || !entity.password) {
+      return null
+    }
+    return this.toAuthUser(entity)
+  }
+
   async create(
     data: RegisterDTO & { hashedPassword: string; organizationId: string }
   ): Promise<AuthUser> {

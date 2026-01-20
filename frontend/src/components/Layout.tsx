@@ -1,6 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { AppToaster } from './AppToaster'
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard' },
@@ -58,7 +57,6 @@ export function Layout() {
         <Outlet />
       </main>
 
-      <AppToaster />
     </div>
   )
 }

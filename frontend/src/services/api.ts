@@ -1,3 +1,5 @@
+import { notify } from './toaster.service'
+
 const API_BASE = "/api";
 
 type ApiFieldErrors = Record<string, string[]>;
@@ -78,6 +80,7 @@ async function request<T>(
 
   if (!response.ok) {
     const message = data?.message || data?.error || "Request failed";
+    notify.error(message);
     throw new ApiError(response.status, message, data?.fieldErrors);
   }
 

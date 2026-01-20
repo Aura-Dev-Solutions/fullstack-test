@@ -1,5 +1,7 @@
 import type { Response } from 'express'
 import type { AuthenticatedRequest } from '@shared/http'
+import { created, noContent, ok } from '@shared/http'
+import { forbidden, notFound } from '@shared/errors'
 import type { DealUseCases } from '../application'
 
 export class DealController {
@@ -8,34 +10,21 @@ export class DealController {
   async getAll(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const deals = await this.dealUseCases.getAllByOrganization(organizationId)
-    res.json(deals)
+    ok(res, deals)
   }
 
   async getById(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
     const deal = await this.dealUseCases.getDealById(id)
 
-    if (!deal) {
-      res.status(404).json({ error: 'Deal not found' })
-      return
-    }
-
-    if (deal.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
-    res.json(deal)
+    if (!deal) throw notFound('Deal not found')
+    if (deal.organizationId !== req.user.organizationId) throw forbidden('Access denied')
+    ok(res, deal)
   }
 
   async create(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const { contactId, stageId, title, value } = req.body
-
-    if (!title || value === undefined) {
-      res.status(400).json({ error: 'title and value are required' })
-      return
-    }
 
     const deal = await this.dealUseCases.createDeal({
       organizationId,
@@ -44,7 +33,7 @@ export class DealController {
       title,
       value,
     })
-    res.status(201).json(deal)
+    created(res, deal)
   }
 
   async update(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -52,15 +41,9 @@ export class DealController {
     const { contactId, stageId, title, value, status } = req.body
 
     const existing = await this.dealUseCases.getDealById(id)
-    if (!existing) {
-      res.status(404).json({ error: 'Deal not found' })
-      return
-    }
-
-    if (existing.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
+    
+    if (!existing) throw notFound("Deal not found")
+    if (existing.organizationId !== req.user.organizationId) throw forbidden('Access denied')
 
     const deal = await this.dealUseCases.updateDeal(id, {
       contactId,
@@ -69,25 +52,17 @@ export class DealController {
       value,
       status,
     })
-
-    res.json(deal)
+    ok(res, deal)    
   }
 
   async delete(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     const existing = await this.dealUseCases.getDealById(id)
-    if (!existing) {
-      res.status(404).json({ error: 'Deal not found' })
-      return
-    }
-
-    if (existing.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
+    if (!existing) throw notFound('Deal not found')
+    if (existing.organizationId !== req.user.organizationId) throw forbidden('Access denied') as any
 
     await this.dealUseCases.deleteDeal(id)
-    res.status(204).send()
+    noContent(res)
   }
 }

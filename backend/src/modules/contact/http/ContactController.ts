@@ -1,5 +1,7 @@
 import type { Response } from 'express'
 import type { AuthenticatedRequest } from '@shared/http'
+import { created, noContent, ok } from '@shared/http'
+import { forbidden, notFound } from '@shared/errors'
 import type { ContactUseCases } from '../application'
 
 export class ContactController {
@@ -8,43 +10,29 @@ export class ContactController {
   async getAll(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const contacts = await this.contactUseCases.getAllByOrganization(organizationId)
-    res.json(contacts)
+    ok(res, contacts)
   }
 
   async getById(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
     const contact = await this.contactUseCases.getContactById(id)
-
-    if (!contact) {
-      res.status(404).json({ error: 'Contact not found' })
-      return
-    }
-
+    if (!contact) throw notFound("Contact not found")    
     // Ensure contact belongs to user's organization
-    if (contact.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
-    res.json(contact)
+    if (contact.organizationId !== req.user.organizationId) throw forbidden("Access denied")
+    ok(res, contact)
   }
 
   async create(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const { name, email, phone } = req.body
-
-    if (!name) {
-      res.status(400).json({ error: 'name is required' })
-      return
-    }
-
+    
     const contact = await this.contactUseCases.createContact({
       organizationId,
       name,
       email,
       phone,
     })
-    res.status(201).json(contact)
+    created(res, contact)
   }
 
   async update(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -52,40 +40,22 @@ export class ContactController {
     const { name, email, phone } = req.body
 
     const existing = await this.contactUseCases.getContactById(id)
-    if (!existing) {
-      res.status(404).json({ error: 'Contact not found' })
-      return
-    }
-
-    if (existing.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
+    if (!existing) throw notFound('Contact not found')
+    if (existing.organizationId !== req.user.organizationId) throw forbidden('Access denied')
     const contact = await this.contactUseCases.updateContact(id, {
       name,
       email,
       phone,
     })
-
-    res.json(contact)
+    ok(res, contact)
   }
 
   async delete(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
-
     const existing = await this.contactUseCases.getContactById(id)
-    if (!existing) {
-      res.status(404).json({ error: 'Contact not found' })
-      return
-    }
-
-    if (existing.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
+    if (!existing) throw notFound('Contact not found')
+    if (existing.organizationId !== req.user.organizationId) throw forbidden('Access denied')
     await this.contactUseCases.deleteContact(id)
-    res.status(204).send()
+    noContent(res)
   }
 }

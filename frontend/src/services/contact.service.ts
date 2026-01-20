@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, ApiResponse, normalizeApiResponse} from './api'
 
 export interface Contact {
   id: string
@@ -22,14 +22,23 @@ export interface UpdateContactDTO {
 }
 
 export const contactService = {
-  getAll: () => api.get<Contact[]>('/contacts'),
+  getAll: async () =>
+    normalizeApiResponse(await api.get<ApiResponse<Contact[]>>("/contacts")),
 
-  getById: (id: string) => api.get<Contact>(`/contacts/${id}`),
+  getById: async (id: string) =>
+    normalizeApiResponse(
+      await api.get<ApiResponse<Contact>>(`/contacts/${id}`),
+    ),
 
-  create: (data: CreateContactDTO) => api.post<Contact>('/contacts', data),
+  create: async (data: CreateContactDTO) =>
+    normalizeApiResponse(
+      await api.post<ApiResponse<Contact>>("/contacts", data),
+    ),
 
-  update: (id: string, data: UpdateContactDTO) =>
-    api.put<Contact>(`/contacts/${id}`, data),
+  update: async (id: string, data: UpdateContactDTO) =>
+    normalizeApiResponse(
+      await api.put<ApiResponse<Contact>>(`/contacts/${id}`, data),
+    ),
 
   delete: (id: string) => api.delete(`/contacts/${id}`),
-}
+};

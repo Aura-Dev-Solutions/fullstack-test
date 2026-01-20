@@ -1,7 +1,9 @@
 import express, { type Express } from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import type { DataSource } from 'typeorm'
 import { createAuthMiddleware } from '@shared/http'
+import { errorHandler } from '@shared/errors'
 import {
   UserUseCases,
   UserEntity,
@@ -12,10 +14,13 @@ import {
 import {
   AuthUseCases,
   PostgresAuthRepository,
+  PostgresSessionRepository,
   BcryptPasswordHasher,
   JwtTokenGenerator,
   AuthController,
   createAuthRoutes,
+  SessionEntity,
+  RefreshTokenService,
 } from '@modules/auth'
 import {
   OrganizationUseCases,
@@ -54,6 +59,7 @@ export function createApp(dataSource: DataSource): Express {
 
   // Middleware
   app.use(cors())
+  app.use(cookieParser())
   app.use(express.json())
 
   // Token Generator (shared for auth and middleware)
@@ -89,14 +95,23 @@ export function createApp(dataSource: DataSource): Express {
     dataSource.getRepository(UserEntity)
   )
   const passwordHasher = new BcryptPasswordHasher()
+
+  // Refresh Token Service
+  const refreshTokenService = new RefreshTokenService()
+  const sessionRepository = new PostgresSessionRepository(
+    dataSource.getRepository(SessionEntity)
+  )
   const authUseCases = new AuthUseCases(
     authRepository,
     passwordHasher,
     tokenGenerator,
     organizationRepository,
-    workflowRepository
+    workflowRepository,
+    sessionRepository,
+    refreshTokenService
   )
   const authController = new AuthController(authUseCases)
+
 
   // Contact Module - Dependency Injection
   const contactRepository = new PostgresContactRepository(
@@ -121,6 +136,8 @@ export function createApp(dataSource: DataSource): Express {
   app.use('/api/contacts', createContactRoutes(contactController, authMiddleware))
   app.use('/api/workflows', createWorkflowRoutes(workflowController, authMiddleware))
   app.use('/api/deals', createDealRoutes(dealController, authMiddleware))
+
+  app.use(errorHandler)
 
   // Health check
   app.get('/api/health', (_req, res) => {

@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, normalizeApiResponse, ApiResponse } from './api'
 
 export type DealStatus = 'open' | 'won' | 'lost'
 
@@ -29,14 +29,19 @@ export interface UpdateDealDTO {
 }
 
 export const dealService = {
-  getAll: () => api.get<Deal[]>('/deals'),
+  getAll: async () =>
+    normalizeApiResponse(await api.get<ApiResponse<Deal[]>>("/deals")),
 
-  getById: (id: string) => api.get<Deal>(`/deals/${id}`),
+  getById: async (id: string) =>
+    normalizeApiResponse(await api.get<ApiResponse<Deal>>(`/deals/${id}`)),
 
-  create: (data: CreateDealDTO) => api.post<Deal>('/deals', data),
+  create: async (data: CreateDealDTO) =>
+    normalizeApiResponse(await api.post<ApiResponse<Deal>>("/deals", data)),
 
-  update: (id: string, data: UpdateDealDTO) =>
-    api.put<Deal>(`/deals/${id}`, data),
+  update: async (id: string, data: UpdateDealDTO) =>
+    normalizeApiResponse(
+      await api.put<ApiResponse<Deal>>(`/deals/${id}`, data),
+    ),
 
   delete: (id: string) => api.delete(`/deals/${id}`),
-}
+};

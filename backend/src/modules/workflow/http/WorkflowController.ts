@@ -1,6 +1,9 @@
 import type { Response } from 'express'
 import type { AuthenticatedRequest } from '@shared/http'
+import { created, noContent, ok } from '@shared/http'
+import { forbidden, notFound } from '@shared/errors'
 import type { WorkflowUseCases } from '../application'
+import { th } from 'zod/locales'
 
 export class WorkflowController {
   constructor(private readonly workflowUseCases: WorkflowUseCases) {}
@@ -8,78 +11,50 @@ export class WorkflowController {
   async getAll(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const workflows = await this.workflowUseCases.getAllByOrganization(organizationId)
-    res.json(workflows)
+    ok(res, workflows)
   }
 
   async getById(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
     const workflow = await this.workflowUseCases.getWorkflowById(id)
-
-    if (!workflow) {
-      res.status(404).json({ error: 'Workflow not found' })
-      return
-    }
-
-    if (workflow.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
-    res.json(workflow)
+    if (!workflow) throw notFound('Workflow not found')
+    if (workflow.organizationId !== req.user.organizationId) throw forbidden('Access denied')
+    ok(res, workflow)
   }
 
   async create(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const { name, stages } = req.body
 
-    if (!name) {
-      res.status(400).json({ error: 'name is required' })
-      return
-    }
-
     const workflow = await this.workflowUseCases.createWorkflow({
       organizationId,
       name,
       stages,
     })
-    res.status(201).json(workflow)
+    created(res, workflow)
   }
 
   async update(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
     const { name } = req.body
-
+    
     const existing = await this.workflowUseCases.getWorkflowById(id)
-    if (!existing) {
-      res.status(404).json({ error: 'Workflow not found' })
-      return
-    }
-
-    if (existing.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
+    if (!existing) throw notFound('Workflow not found')
+    if (existing.organizationId !== req.user.organizationId) throw forbidden('Access denied')
+    
     const workflow = await this.workflowUseCases.updateWorkflow(id, { name })
-    res.json(workflow)
+    ok(res, workflow)
   }
 
   async delete(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id } = req.params
 
     const existing = await this.workflowUseCases.getWorkflowById(id)
-    if (!existing) {
-      res.status(404).json({ error: 'Workflow not found' })
-      return
-    }
-
-    if (existing.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
+    if (!existing) throw notFound("Workflow not found")
+    if (existing.organizationId !== req.user.organizationId) throw forbidden('Access denied')
 
     await this.workflowUseCases.deleteWorkflow(id)
-    res.status(204).send()
+    created(res, existing)
   }
 
   async addStage(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -87,20 +62,8 @@ export class WorkflowController {
     const { name, order, color } = req.body
 
     const workflow = await this.workflowUseCases.getWorkflowById(id)
-    if (!workflow) {
-      res.status(404).json({ error: 'Workflow not found' })
-      return
-    }
-
-    if (workflow.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
-
-    if (!name || order === undefined) {
-      res.status(400).json({ error: 'name and order are required' })
-      return
-    }
+    if (!workflow) throw notFound("Workflow not found")
+    if (workflow.organizationId !== req.user.organizationId) throw forbidden('Access denied')
 
     const stage = await this.workflowUseCases.addStage({
       workflowId: id,
@@ -108,7 +71,7 @@ export class WorkflowController {
       order,
       color,
     })
-    res.status(201).json(stage)
+    created(res, stage)
   }
 
   async updateStage(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -116,15 +79,9 @@ export class WorkflowController {
     const { name, order, color } = req.body
 
     const workflow = await this.workflowUseCases.getWorkflowById(id)
-    if (!workflow) {
-      res.status(404).json({ error: 'Workflow not found' })
-      return
-    }
+    if (!workflow) throw notFound('Workflow not found')
 
-    if (workflow.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
+    if (workflow.organizationId !== req.user.organizationId) throw forbidden('Access denied')
 
     const stage = await this.workflowUseCases.updateStage(stageId, {
       name,
@@ -132,35 +89,20 @@ export class WorkflowController {
       color,
     })
 
-    if (!stage) {
-      res.status(404).json({ error: 'Stage not found' })
-      return
-    }
-
-    res.json(stage)
+    if (!stage) throw notFound("Stage not found")
+    ok(res, stage)
   }
 
   async deleteStage(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { id, stageId } = req.params
 
     const workflow = await this.workflowUseCases.getWorkflowById(id)
-    if (!workflow) {
-      res.status(404).json({ error: 'Workflow not found' })
-      return
-    }
-
-    if (workflow.organizationId !== req.user.organizationId) {
-      res.status(403).json({ error: 'Access denied' })
-      return
-    }
+    if (!workflow) throw notFound("Workflow not found")
+    if (workflow.organizationId !== req.user.organizationId) throw forbidden('Access denied')
 
     const deleted = await this.workflowUseCases.deleteStage(stageId)
+    if (!deleted) throw notFound("Stage not found")
 
-    if (!deleted) {
-      res.status(404).json({ error: 'Stage not found' })
-      return
-    }
-
-    res.status(204).send()
+    noContent(res)
   }
 }

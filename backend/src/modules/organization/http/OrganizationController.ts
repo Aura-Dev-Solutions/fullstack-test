@@ -1,5 +1,7 @@
 import type { Response } from 'express'
 import type { AuthenticatedRequest } from '@shared/http'
+import { ok } from '@shared/http'
+import { notFound } from '@shared/errors'
 import type { OrganizationUseCases } from '../application'
 
 export class OrganizationController {
@@ -8,28 +10,17 @@ export class OrganizationController {
   async getById(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const organization = await this.organizationUseCases.getOrganizationById(organizationId)
-
-    if (!organization) {
-      res.status(404).json({ error: 'Organization not found' })
-      return
-    }
-
-    res.json(organization)
+    if (!organization) throw notFound('Organization not found')
+    ok(res, organization)
   }
 
   async update(req: AuthenticatedRequest, res: Response): Promise<void> {
     const { organizationId } = req.user
     const { name } = req.body
-
     const organization = await this.organizationUseCases.updateOrganization(organizationId, {
       name,
     })
-
-    if (!organization) {
-      res.status(404).json({ error: 'Organization not found' })
-      return
-    }
-
-    res.json(organization)
+    if (!organization) throw notFound('Organization not found')
+    ok(res, organization)
   }
 }

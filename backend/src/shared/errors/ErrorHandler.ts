@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import { ZodError } from "zod";
 
 export function errorHandler(
   err: any,
@@ -6,6 +7,15 @@ export function errorHandler(
   res: Response,
   _next: NextFunction,
 ) {
+  // Zod => 400
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      error: "ValidationError",
+      message: "Invalid request data",
+      fieldErrors: err.flatten().fieldErrors ?? {},
+    });
+  }
+
   if (err?.name === "ValidationError") {
     return res.status(400).json({
       error: err.name,

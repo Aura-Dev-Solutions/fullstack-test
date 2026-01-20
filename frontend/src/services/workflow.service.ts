@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, ApiResponse, normalizeApiResponse } from './api'
 
 export interface Stage {
   id: string
@@ -28,23 +28,44 @@ export interface CreateStageDTO {
 }
 
 export const workflowService = {
-  getAll: () => api.get<Workflow[]>('/workflows'),
+  getAll: async () =>
+    normalizeApiResponse(await api.get<ApiResponse<Workflow[]>>("/workflows")),
 
-  getById: (id: string) => api.get<Workflow>(`/workflows/${id}`),
+  getById: async (id: string) =>
+    normalizeApiResponse(
+      await api.get<ApiResponse<Workflow>>(`/workflows/${id}`),
+    ),
 
-  create: (data: CreateWorkflowDTO) => api.post<Workflow>('/workflows', data),
+  create: async (data: CreateWorkflowDTO) =>
+    normalizeApiResponse(
+      await api.post<ApiResponse<Workflow>>("/workflows", data),
+    ),
 
-  update: (id: string, data: { name?: string }) =>
-    api.put<Workflow>(`/workflows/${id}`, data),
+  update: async (id: string, data: { name?: string }) =>
+    normalizeApiResponse(
+      await api.put<ApiResponse<Workflow>>(`/workflows/${id}`, data),
+    ),
 
   delete: (id: string) => api.delete(`/workflows/${id}`),
 
-  addStage: (workflowId: string, data: CreateStageDTO) =>
-    api.post<Stage>(`/workflows/${workflowId}/stages`, data),
-
-  updateStage: (workflowId: string, stageId: string, data: Partial<CreateStageDTO>) =>
-    api.put<Stage>(`/workflows/${workflowId}/stages/${stageId}`, data),
-
+  addStage: async (workflowId: string, data: CreateStageDTO) =>
+    normalizeApiResponse(
+      await api.post<ApiResponse<Stage>>(
+        `/workflows/${workflowId}/stages`,
+        data,
+      ),
+    ),
+  updateStage: async (
+    workflowId: string,
+    stageId: string,
+    data: Partial<CreateStageDTO>,
+  ) =>
+    normalizeApiResponse(
+      await api.put<ApiResponse<Stage>>(
+        `/workflows/${workflowId}/stages/${stageId}`,
+        data,
+      ),
+    ),
   deleteStage: (workflowId: string, stageId: string) =>
     api.delete(`/workflows/${workflowId}/stages/${stageId}`),
-}
+};

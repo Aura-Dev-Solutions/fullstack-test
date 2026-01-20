@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, ApiResponse, normalizeApiResponse } from './api'
 
 export interface Organization {
   id: string
@@ -7,8 +7,13 @@ export interface Organization {
 }
 
 export const organizationService = {
-  get: () => api.get<Organization>('/organizations'),
+  get: async () =>
+    normalizeApiResponse(
+      await api.get<ApiResponse<Organization>>("/organizations"),
+    ),
 
-  update: (data: { name?: string }) =>
-    api.put<Organization>('/organizations', data),
-}
+  update: async (data: { name?: string }) =>
+    normalizeApiResponse(
+      await api.put<ApiResponse<Organization>>("/organizations", data),
+    ),
+};

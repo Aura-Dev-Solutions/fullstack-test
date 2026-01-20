@@ -10,6 +10,7 @@ import type {
 } from "../domain";
 import type { OrganizationRepository } from "@modules/organization/domain";
 import type { WorkflowRepository } from "@modules/workflow/domain";
+import { invalidCredentials } from "@shared/errors" 
 import type { RefreshTokenService } from "../infrastructure";
 
 export class AuthUseCases {
@@ -82,7 +83,7 @@ export class AuthUseCases {
   async login(data: LoginDTO): Promise<AuthResponse> {
     const user = await this.authRepository.findByEmail(data.email);
     if (!user) {
-      throw new Error("Invalid credentials");
+      throw invalidCredentials("User or password is incorrect");
     }
 
     const isValidPassword = await this.passwordHasher.verify(
@@ -93,7 +94,7 @@ export class AuthUseCases {
       console.warn("[AUTH] Invalid login attempt", {
         email: data.email,
       });
-      throw new Error("Invalid credentials");
+      throw invalidCredentials("User or password is incorrect");
     }
 
     if (!user.organizationId) {

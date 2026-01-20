@@ -1,1 +1,6 @@
 export * from "./auth.schema"
+export * from "./contact.schema"
+export * from "./deal.schema"
+export * from "./organization.schema"
+export * from "./user.schema"
+export * from "./workflow.schema"

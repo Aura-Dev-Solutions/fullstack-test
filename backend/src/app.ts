@@ -3,6 +3,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import type { DataSource } from 'typeorm'
 import { createAuthMiddleware } from '@shared/http'
+import { errorHandler } from '@shared/errors'
 import {
   UserUseCases,
   UserEntity,
@@ -135,6 +136,8 @@ export function createApp(dataSource: DataSource): Express {
   app.use('/api/contacts', createContactRoutes(contactController, authMiddleware))
   app.use('/api/workflows', createWorkflowRoutes(workflowController, authMiddleware))
   app.use('/api/deals', createDealRoutes(dealController, authMiddleware))
+
+  app.use(errorHandler)
 
   // Health check
   app.get('/api/health', (_req, res) => {

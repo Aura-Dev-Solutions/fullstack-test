@@ -1,4 +1,4 @@
-import { api } from './api'
+import { api, ApiResponse, normalizeApiResponse } from './api'
 
 export interface User {
   id: string
@@ -29,11 +29,11 @@ export interface RegisterCredentials {
 }
 
 export const authService = {
-  login: (credentials: LoginCredentials) =>
-    api.post<AuthResponse>('/auth/login', credentials),
+  login: async (credentials: LoginCredentials) =>
+    normalizeApiResponse(await api.post<ApiResponse<AuthResponse>>('/auth/login', credentials)),
 
-  register: (credentials: RegisterCredentials) =>
-    api.post<AuthResponse>('/auth/register', credentials),
+  register: async (credentials: RegisterCredentials) =>
+    normalizeApiResponse(await api.post<ApiResponse<AuthResponse>>('/auth/register', credentials)),
 
   getToken: () => localStorage.getItem('token'),
 

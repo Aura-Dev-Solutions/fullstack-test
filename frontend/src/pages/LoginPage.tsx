@@ -2,62 +2,39 @@ import { useState, type FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { authService, ApiError } from "../services";
+import { z } from "zod";
+import { getFormErrors } from "../utils";
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-function getEmailError(value: string) {
-  if (!value.trim()) {
-    return "Email is required";
-  }
-  if (!emailPattern.test(value)) {
-    return "Enter a valid email address";
-  }
-  return undefined;
-}
-
-function getPasswordError(value: string) {
-  if (!value.trim()) {
-    return "Password is required";
-  }
-  return undefined;
-}
-
-function validateForm(email: string, password: string) {
-  const formErrors: { email?: string; password?: string } = {};
-  const emailError = getEmailError(email);
-  const passwordError = getPasswordError(password);
-
-  if (emailError) formErrors.email = emailError;
-  if (passwordError) formErrors.password = passwordError;
-
-  return formErrors;
-}
+const loginSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Enter a valid email address"),
+  password: z.string().trim().min(1, "Password is required"),
+});
 
 export function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{
-    email?: string;
-    password?: string;
-    form?: string;
-  }>({});
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
+    {},
+  );
+  const [formError, setFormError] = useState<string | null>(null);
   const [touched, setTouched] = useState({ email: false, password: false });
   const [loading, setLoading] = useState(false);
 
-  const emailError = touched.email ? getEmailError(email) : undefined;
-  const passwordError = touched.password
-    ? getPasswordError(password)
-    : undefined;
+  const emailError = touched.email ? errors.email : undefined;
+  const passwordError = touched.password ? errors.password : undefined;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrors({});
     setLoading(true);
 
-    const validationErrors = validateForm(email, password);
+    const validationErrors = getFormErrors(loginSchema, formData);
     if (Object.keys(validationErrors).length > 0) {
       setTouched({ email: true, password: true });
       setErrors(validationErrors);
@@ -66,14 +43,17 @@ export function LoginPage() {
     }
 
     try {
-      const response = await authService.login({ email, password });
+      const response = await authService.login({
+        email: formData.email,
+        password: formData.password,
+      });
       login(response.token.accessToken, response.user);
       navigate("/dashboard");
     } catch (err) {
       if (err instanceof ApiError) {
-        setErrors({ form: err.message });
+        setFormError(err.message);
       } else {
-        setErrors({ form: "An unexpected error occurred" });
+        setFormError("An unexpected error occurred");
       }
     } finally {
       setLoading(false);
@@ -90,6 +70,11 @@ export function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {formError && (
+              <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">
+                {formError}
+              </div>
+            )}
             <div>
               <label
                 htmlFor="email"
@@ -100,39 +85,35 @@ export function LoginPage() {
               <input
                 id="email"
                 type="email"
-                value={email}
+                value={formData.email}
                 onChange={(e) => {
                   const nextValue = e.target.value;
-                  setEmail(nextValue);
+                  const nextFormData = {
+                    ...formData,
+                    email: nextValue,
+                  };
+                  setFormData(nextFormData);
                   if (touched.email) {
-                    setErrors((prev) => ({
-                      ...prev,
-                      email: getEmailError(nextValue),
-                    }));
+                    setErrors(getFormErrors(loginSchema, nextFormData));
                   }
                 }}
                 onBlur={() => {
                   setTouched((prev) => ({ ...prev, email: true }));
-                  setErrors((prev) => ({
-                    ...prev,
-                    email: getEmailError(email),
-                  }));
+                  setErrors(getFormErrors(loginSchema, formData));
                 }}
                 required
-                aria-invalid={!!(errors.email || emailError)}
-                aria-describedby={
-                  errors.email || emailError ? "login-email-error" : undefined
-                }
+                aria-invalid={!!emailError}
+                aria-describedby={emailError ? "login-email-error" : undefined}
                 className={`w-full px-4 py-3 rounded-lg border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow ${
-                  errors.email || emailError
+                  emailError
                     ? "border-red-300 focus:ring-red-500"
                     : "border-slate-300"
                 }`}
                 placeholder="you@example.com"
               />
-              {(errors.email || emailError) && (
+              {emailError && (
                 <p id="login-email-error" className="mt-2 text-sm text-red-600">
-                  {errors.email || emailError}
+                  {emailError}
                 </p>
               )}
             </div>
@@ -147,44 +128,40 @@ export function LoginPage() {
               <input
                 id="password"
                 type="password"
-                value={password}
+                value={formData.password}
                 onChange={(e) => {
                   const nextValue = e.target.value;
-                  setPassword(nextValue);
+                  const nextFormData = {
+                    ...formData,
+                    password: nextValue,
+                  };
+                  setFormData(nextFormData);
                   if (touched.password) {
-                    setErrors((prev) => ({
-                      ...prev,
-                      password: getPasswordError(nextValue),
-                    }));
+                    setErrors(getFormErrors(loginSchema, nextFormData));
                   }
                 }}
                 onBlur={() => {
                   setTouched((prev) => ({ ...prev, password: true }));
-                  setErrors((prev) => ({
-                    ...prev,
-                    password: getPasswordError(password),
-                  }));
+                  setErrors(getFormErrors(loginSchema, formData));
                 }}
                 required
-                aria-invalid={!!(errors.password || passwordError)}
+                aria-invalid={!!passwordError}
                 aria-describedby={
-                  errors.password || passwordError
-                    ? "login-password-error"
-                    : undefined
+                  passwordError ? "login-password-error" : undefined
                 }
                 className={`w-full px-4 py-3 rounded-lg border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow ${
-                  errors.password || passwordError
+                  passwordError
                     ? "border-red-300 focus:ring-red-500"
                     : "border-slate-300"
                 }`}
                 placeholder="Enter your password"
               />
-              {(errors.password || passwordError) && (
+              {passwordError && (
                 <p
                   id="login-password-error"
                   className="mt-2 text-sm text-red-600"
                 >
-                  {errors.password || passwordError}
+                  {passwordError}
                 </p>
               )}
             </div>

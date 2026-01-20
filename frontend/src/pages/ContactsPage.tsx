@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { contactService, type Contact } from "../services";
+import { contactService, type Contact, notify } from "../services";
 import { getFormErrors } from "../utils/validation";
 
 const contactSchema = z.object({
@@ -87,8 +87,10 @@ export function ContactsPage() {
     try {
       if (editingContact) {
         await contactService.update(editingContact.id, formData);
+        notify.success("The contact was updated successfully");
       } else {
         await contactService.create(formData);
+        notify.success("The contact was created successfully");
       }
       await loadContacts();
       setShowForm(false);
@@ -104,6 +106,7 @@ export function ContactsPage() {
 
     try {
       await contactService.delete(id);
+      notify.success("The contact was deleted successfully");
       await loadContacts();
     } catch (error) {
       console.error("Failed to delete contact:", error);

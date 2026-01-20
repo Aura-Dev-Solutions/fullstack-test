@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { workflowService, type Workflow, type Stage } from '../services'
+import { workflowService, type Workflow, type Stage, notify } from '../services'
 
 export function WorkflowsPage() {
   const [workflows, setWorkflows] = useState<Workflow[]>([])
@@ -40,6 +40,7 @@ export function WorkflowsPage() {
       await loadWorkflows()
       const updated = await workflowService.getById(selectedWorkflow.id)
       setSelectedWorkflow(updated)
+      notify.success('The workflow stage was created successfully')
     } catch (error) {
       console.error('Failed to add stage:', error)
     }
@@ -54,6 +55,7 @@ export function WorkflowsPage() {
       await loadWorkflows()
       const updated = await workflowService.getById(selectedWorkflow.id)
       setSelectedWorkflow(updated)
+      notify.success('The workflow stage was deleted successfully')
     } catch (error) {
       console.error('Failed to delete stage:', error)
     }
@@ -70,6 +72,7 @@ export function WorkflowsPage() {
       await loadWorkflows()
       const updated = await workflowService.getById(selectedWorkflow.id)
       setSelectedWorkflow(updated)
+      notify.success('The workflow stage was updated successfully')
     } catch (error) {
       console.error('Failed to update stage:', error)
     }

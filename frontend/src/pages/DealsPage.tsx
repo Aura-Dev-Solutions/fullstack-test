@@ -7,6 +7,7 @@ import {
   type Deal,
   type Stage,
   type Contact,
+  notify,
 } from "../services";
 import { getFormErrors } from "../utils/validation";
 
@@ -116,8 +117,10 @@ export function DealsPage() {
 
       if (editingDeal) {
         await dealService.update(editingDeal.id, data);
+        notify.success("The deal was updated successfully");
       } else {
         await dealService.create(data);
+        notify.success("The deal was created successfully");
       }
       await loadData();
       setShowForm(false);
@@ -133,6 +136,7 @@ export function DealsPage() {
 
     try {
       await dealService.delete(id);
+      notify.success("The deal was deleted successfully");
       await loadData();
     } catch (error) {
       console.error("Failed to delete deal:", error);
@@ -146,6 +150,7 @@ export function DealsPage() {
         prev.map((d) => (d.id === dealId ? { ...d, stageId } : d)),
       );
       await dealService.update(dealId, { stageId });
+      notify.success("The deal stage was updated successfully");
     } catch (error) {
       console.error("Failed to update deal stage:", error);
       await loadData(); // Revert on error

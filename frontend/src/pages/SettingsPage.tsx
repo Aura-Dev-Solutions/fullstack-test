@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { useAuth } from "../context/AuthContext";
-import { organizationService, type Organization } from "../services";
+import { organizationService, type Organization, notify } from "../services";
 import { getFormErrors } from "../utils/validation";
 
 const organizationSchema = z.object({
@@ -48,6 +48,7 @@ export function SettingsPage() {
       const updated = await organizationService.update({ name });
       setOrganization(updated);
       setEditing(false);
+      notify.success("The organization was updated successfully");
     } catch (error) {
       console.error("Failed to update organization:", error);
     } finally {

@@ -39,7 +39,7 @@ The current API endpoints lack comprehensive input validation:
    - Display field-specific error messages next to form inputs
    - Implement toast notifications for system-level errors
 
-### Relevant Files
+## Relevant Files
 - `backend/src/modules/auth/http/AuthController.ts`
 - `backend/src/modules/contact/http/ContactController.ts`
 - `backend/src/modules/deal/http/DealController.ts`
@@ -52,7 +52,7 @@ The current API endpoints lack comprehensive input validation:
 - [ ] Error messages are specific and actionable (e.g., "Name must be between 2-50 characters" instead of "Invalid input")
 - [ ] Frontend forms display field-specific validation errors
 - [ ] System prevents creation or update of records with invalid data
-- [ ] Validation rules are consistent between frontend and backend
+- [ ] Backend validation errors are mapped to specific form fields in the frontend (field-level, not just a generic toast)
 
 ## Stretch Goals
 *(Optional - demonstrates exceptional skill)*

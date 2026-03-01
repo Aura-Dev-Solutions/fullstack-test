@@ -37,6 +37,8 @@ The dashboard page exists but lacks actual analytics:
 
 You can install chart libraries such as recharts, chart.js, or similar. Justify your choice in the PR.
 
+**Note:** You may calculate metrics client-side from existing deal endpoints or create dedicated analytics endpoints. Both approaches are acceptable — document your choice and the tradeoffs in your PR.
+
 ### Relevant Files
 - `frontend/src/pages/DashboardPage.tsx`
 - `backend/src/modules/deal/http/DealController.ts`

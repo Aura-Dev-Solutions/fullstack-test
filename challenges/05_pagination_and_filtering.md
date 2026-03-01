@@ -44,20 +44,24 @@ The current repository implementations have limitations:
    - Add sort indicators and controls
    - Show loading states during data fetching
 
-### Relevant Files
+## Relevant Files
+- `backend/src/shared/domain/Pagination.ts` ← shared interfaces, start here
 - `backend/src/modules/contact/domain/ContactRepository.ts`
 - `backend/src/modules/contact/infrastructure/PostgresContactRepository.ts`
 - `backend/src/modules/contact/http/ContactController.ts`
-- `backend/src/shared/domain/Pagination.ts`
+- `backend/src/modules/deal/infrastructure/PostgresDealRepository.ts`
+- `backend/src/modules/deal/http/DealController.ts`
+- `frontend/src/types/pagination.ts` ← frontend mirror of backend interfaces
 - `frontend/src/services/contact.service.ts`
 - `frontend/src/pages/ContactsPage.tsx`
+- `frontend/src/pages/DealsPage.tsx`
 
 ## Acceptance Criteria
 - [ ] All list endpoints support pagination parameters (page, limit)
 - [ ] Response includes pagination metadata (total count, pages, etc.)
 - [ ] Users can filter data by any relevant field
 - [ ] Data tables show appropriate loading states during pagination
-- [ ] System performance remains responsive even with large datasets
+- [ ] Paginated API queries use SQL LIMIT/OFFSET and do not load all records into memory
 - [ ] Frontend UI clearly indicates active filters and sort order
 
 ## Stretch Goals

@@ -58,7 +58,7 @@ Before implementing, think through and document in your PR:
 - Send an in-app notification (or console log as a placeholder) when a deal is assigned to you
 - Show an "Assigned to me" quick filter button
 - Include assignee data in the dashboard metrics (e.g., pipeline value by rep)
-- Add validation that the `assigneeId` belongs to the same organization as the deal
+- Enforce and document the organization boundary rule for assignees (e.g., prevent cross-org assignment)
 
 ## Relevant Files
 
@@ -72,7 +72,7 @@ Before implementing, think through and document in your PR:
 
 ## Acceptance Criteria
 
-- [ ] Deals can be created and updated with an optional assignee from the same organization
+- [ ] Deals can be created and updated with an optional assignee, consistent with the business rules you defined
 - [ ] The deals list endpoint supports filtering by `assigneeId`
 - [ ] Deal cards in the Kanban view show the assignee's name or initials
 - [ ] The deals page has an assignee filter (dropdown or similar)

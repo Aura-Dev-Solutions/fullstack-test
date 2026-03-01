@@ -27,6 +27,7 @@ The current system doesn't differentiate between user roles:
 
 1. Implement role-based access control
    - Add a `role` field to the User domain model and UserEntity (values: `admin`, `member`)
+   - Update the `TokenPayload` interface and `TokenGenerator.generate()` signature to include `role`
    - Include the `role` field in the JWT token payload and `AuthenticatedRequest`
    - Create an authorization middleware that checks role requirements per route
 
@@ -34,6 +35,7 @@ The current system doesn't differentiate between user roles:
    - Enhance middleware to check for required role
    - Implement proper error responses for unauthorized actions (403 Forbidden)
    - Add role information to the authentication token
+   - Create an endpoint for administrators to assign or update user roles (e.g., `PUT /users/:id/role`)
 
 3. Implement UI role awareness
    - Conditionally render UI elements based on user role (e.g., hide admin actions from members)
@@ -41,7 +43,7 @@ The current system doesn't differentiate between user roles:
 
 **Note:** If implementing both Challenge 3 and Challenge 6, design Challenge 3 with role extensibility in mind (add a `role` field to the JWT payload from the start).
 
-### Relevant Files
+## Relevant Files
 - `backend/src/modules/users/domain/User.ts`
 - `backend/src/modules/users/infrastructure/UserEntity.ts`
 - `backend/src/shared/http/authMiddleware.ts`
@@ -54,7 +56,7 @@ The current system doesn't differentiate between user roles:
 - [ ] API endpoints enforce role requirements
 - [ ] UI elements are conditionally displayed based on user role
 - [ ] Users receive clear feedback when attempting unauthorized actions
-- [ ] Permission changes take effect immediately without requiring re-login
+- [ ] Role changes are reflected on the user's next token refresh or re-login (if Challenge 3 is implemented, this happens automatically)
 
 ## Stretch Goals
 *(Optional - demonstrates exceptional skill)*

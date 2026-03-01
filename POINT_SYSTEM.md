@@ -19,7 +19,7 @@ This document outlines the point system for the technical test challenges. Candi
 | 9 | [Activity Logging System](./challenges/09_activity_logging.md) | Low | 10 | Domain modeling, data association |
 | 10 | [File Upload System](./challenges/10_file_upload.md) | Low | 10 | Infrastructure, file handling, validation |
 
-**Total Available Points: 160**
+**Total Available Points: 165**
 
 ## Minimum Requirements
 

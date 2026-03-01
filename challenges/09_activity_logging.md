@@ -3,7 +3,7 @@
 **Estimated Time:** 1.5-2 hours
 **Technical Difficulty:** Medium
 
-**Note:** Challenge 10 (Email Notifications) complements this challenge. Consider designing the activity system to trigger notifications.
+**Note:** Challenge 10 (File Upload System) complements this challenge — files attached to contacts or deals can be recorded as activity events.
 
 ## User Story
 **As a** sales manager,
@@ -30,11 +30,15 @@ The current system lacks activity tracking capabilities:
 1. Implement activity logging system
    - Allow users to create manual activities (note, call, meeting) associated with contacts and/or deals
    - Record timestamps and user information for each activity
-   - Support custom activity types
+   - Support custom activity types beyond the defaults
+
+   **Suggested Activity entity fields:** `id`, `type` (e.g. `note` | `call` | `meeting` | `custom`), `description`, `contactId` (optional), `dealId` (optional), `userId`, `createdAt`. An activity must be associated with at least one of `contactId` or `dealId`.
 
 2. Create activity timeline visualization
-   - Implement chronological display of activities on contact and deal detail views
+   - Implement chronological display of activities on the deal detail view (`DealDetailPage.tsx`)
    - Allow filtering by activity type and date range
+
+   **Note:** A contact detail page does not currently exist. You may add the activity timeline to the existing contacts list (e.g., expandable rows or a modal) or create a new contact detail view — document your choice.
 
 ### Relevant Files
 - `backend/src/modules/contact/domain/Contact.ts`

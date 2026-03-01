@@ -27,16 +27,22 @@ The current system lacks file management capabilities:
 
 1. Implement file upload functionality
    - Create file upload endpoints for contacts and deals (using multer or similar)
+   - Store files locally (e.g., in an `uploads/` directory at the project root)
    - Support multiple file uploads
-   - Add file type validation and size limits
+   - Add file type validation and size limits (suggested: 10MB max, common document types: PDF, DOC, DOCX, XLS, XLSX, PNG, JPG, CSV — document your chosen limits)
 
 2. Implement file listing and download
    - List uploaded files for a given contact or deal
    - Add download endpoints for retrieving files
 
-### Relevant Files
+3. Create upload UI
+   - Add file upload components to the contact and deal detail views
+   - Show upload progress and validation feedback
+
+## Relevant Files
 - `backend/src/modules/contact/http/ContactController.ts`
 - `backend/src/modules/deal/http/DealController.ts`
+- New files needed: File entity (metadata: name, mimetype, size, path, uploadedBy, uploadedAt), file upload routes and middleware
 
 ## Acceptance Criteria
 - [ ] Users can upload files to contacts and deals with proper validation

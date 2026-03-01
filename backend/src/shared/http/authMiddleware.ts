@@ -32,3 +32,6 @@ export function createAuthMiddleware(tokenGenerator: TokenGenerator): RequestHan
     next()
   }
 }
+
+// TODO [Challenge 5]: Create a requireRole(role: UserRole) middleware factory
+// Example: export const requireRole = (role: UserRole) => (req: AuthenticatedRequest, res: Response, next: NextFunction) => { ... }

@@ -14,7 +14,8 @@
     "typeorm": "tsx ./node_modules/typeorm/cli.js",
     "migration:generate": "pnpm typeorm migration:generate -d src/infrastructure/database/data-source.ts",
     "migration:run": "pnpm typeorm migration:run -d src/infrastructure/database/data-source.ts",
-    "migration:revert": "pnpm typeorm migration:revert -d src/infrastructure/database/data-source.ts"
+    "migration:revert": "pnpm typeorm migration:revert -d src/infrastructure/database/data-source.ts",
+    "seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

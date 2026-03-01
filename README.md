@@ -1,6 +1,20 @@
-# Aura CRM - Fullstack Application
+# Aura CRM - Fullstack Technical Assessment
 
-A modern CRM (Customer Relationship Management) system built with TypeScript, React, and Node.js. This application helps organizations manage their sales pipeline, contacts, and deals.
+## Start Here
+
+This repository is both a working CRM application and a technical assessment. Before touching any code, read these three documents in order:
+
+| # | Document | What you'll find |
+|---|----------|-----------------|
+| 1 | [`TECHNICAL_TEST.md`](./TECHNICAL_TEST.md) | What we're evaluating, the rules, and how to submit |
+| 2 | [`POINT_SYSTEM.md`](./POINT_SYSTEM.md) | Point values, minimum requirements, and **recommended approach** |
+| 3 | [`challenges/`](./challenges/) | The 10 challenges, starting with `01_code_audit.md` |
+
+**The order matters.** The challenges are numbered intentionally — start with Challenge 1 before looking at the others. Reading the codebase before implementing is part of what we're evaluating.
+
+Once you've read those documents, come back here for setup instructions.
+
+---
 
 ## Project Structure
 
@@ -62,8 +76,13 @@ Make sure PostgreSQL is running and create a database named `fullstack_db` (or t
 4. Run database migrations:
 
 ```bash
-cd backend
-pnpm migration:run
+pnpm --filter backend migration:run
+```
+
+5. (Optional) Seed the database with sample data:
+
+```bash
+pnpm seed
 ```
 
 ## Development

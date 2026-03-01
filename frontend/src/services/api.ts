@@ -1,5 +1,7 @@
 const API_BASE = '/api'
 
+// Note: Token is read directly from localStorage. Consider adding a 401 interceptor in Challenge 1 to automatically refresh tokens on unauthorized responses.
+
 class ApiError extends Error {
   constructor(
     public status: number,
@@ -10,6 +12,7 @@ class ApiError extends Error {
   }
 }
 
+// TODO [Challenge 1]: Add a 401 response interceptor that attempts token refresh before failing the request
 async function request<T>(
   endpoint: string,
   options: RequestInit = {}

@@ -42,4 +42,8 @@ export const authService = {
   removeToken: () => localStorage.removeItem('token'),
 
   isAuthenticated: () => !!localStorage.getItem('token'),
+
+  // TODO [Challenge 1]: Uncomment and implement refresh token support
+  // refreshToken: (refreshToken: string) => api.post<{ accessToken: string; expiresAt: number }>('/auth/refresh', { refreshToken }),
+  // logout: () => api.post<void>('/auth/logout', {}),
 }

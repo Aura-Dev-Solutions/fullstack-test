@@ -14,6 +14,7 @@ export function ContactsPage() {
   }, [])
 
   async function loadContacts() {
+    // TODO [Challenge 3]: Add pagination parameters (page, limit) to this request and handle PaginatedResult response
     try {
       const data = await contactService.getAll()
       setContacts(data)
@@ -43,6 +44,8 @@ export function ContactsPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
+    // TODO [Challenge 2]: Add form validation here before submitting
+    // Validate: name (required, 2-50 chars), email (valid format if provided), phone (valid format if provided)
 
     try {
       if (editingContact) {

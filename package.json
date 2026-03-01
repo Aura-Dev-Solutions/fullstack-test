@@ -10,7 +10,8 @@
     "test:backend": "pnpm --filter backend test",
     "test": "pnpm run --parallel test",
     "build": "pnpm run --parallel build",
-    "lint": "pnpm run --parallel lint"
+    "lint": "pnpm run --parallel lint",
+    "seed": "pnpm --filter backend seed"
   },
   "engines": {
     "node": ">=18.0.0"

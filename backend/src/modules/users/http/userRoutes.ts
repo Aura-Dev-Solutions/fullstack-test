@@ -1,8 +1,13 @@
-import { Router } from 'express'
+import { Router, type RequestHandler } from 'express'
 import type { UserController } from './UserController'
 
-export function createUserRoutes(controller: UserController): Router {
+export function createUserRoutes(
+  controller: UserController,
+  authMiddleware: RequestHandler
+): Router {
   const router = Router()
+
+  router.use(authMiddleware)
 
   router.get('/', (req, res) => controller.getAll(req, res))
   router.get('/:id', (req, res) => controller.getById(req, res))

@@ -1,8 +1,11 @@
 # Challenge 2: Robust Data Validation & Error Handling (20 points - High)
 
+**Estimated Time:** 2-3 hours
+**Technical Difficulty:** Medium
+
 ## User Story
-**As a** sales representative using the CRM,  
-**I want** consistent and clear feedback when I enter invalid data,  
+**As a** sales representative using the CRM,
+**I want** consistent and clear feedback when I enter invalid data,
 **So that** I can quickly correct my inputs and maintain accurate customer records.
 
 ## Business Value
@@ -19,11 +22,13 @@ The current API endpoints lack comprehensive input validation:
 - No structured approach to validation and error handling
 - Potential for invalid data to corrupt business records
 
-## Requirements
+## Core Requirements
+*(Required for full points)*
+
 1. Implement comprehensive validation
    - Add a validation layer using a library like Zod or class-validator
-   - Create validation schemas for all DTOs (Data Transfer Objects)
-   - Ensure consistent validation across all endpoints
+   - Create validation schemas for DTOs in auth, contacts, and deals endpoints
+   - Ensure consistent validation across these endpoints
 
 2. Enhance error handling
    - Create a centralized error handling middleware
@@ -32,12 +37,14 @@ The current API endpoints lack comprehensive input validation:
 
 3. Improve frontend error presentation
    - Display field-specific error messages next to form inputs
-   - Add real-time validation feedback during form completion
    - Implement toast notifications for system-level errors
 
-4. Add validation logging
-   - Log validation failures for monitoring and improvement
-   - Track common validation issues to improve UI/UX
+### Relevant Files
+- `backend/src/modules/auth/http/AuthController.ts`
+- `backend/src/modules/contact/http/ContactController.ts`
+- `backend/src/modules/deal/http/DealController.ts`
+- `frontend/src/pages/ContactsPage.tsx`
+- `frontend/src/pages/DealsPage.tsx`
 
 ## Acceptance Criteria
 - [ ] All API endpoints validate input data before processing
@@ -46,3 +53,10 @@ The current API endpoints lack comprehensive input validation:
 - [ ] Frontend forms display field-specific validation errors
 - [ ] System prevents creation or update of records with invalid data
 - [ ] Validation rules are consistent between frontend and backend
+
+## Stretch Goals
+*(Optional - demonstrates exceptional skill)*
+
+- Real-time validation feedback as the user types
+- Validation logging to track common validation issues for UI/UX improvement
+- Extend validation to all remaining endpoints beyond auth, contacts, and deals

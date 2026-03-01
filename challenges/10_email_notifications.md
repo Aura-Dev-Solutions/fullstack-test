@@ -1,8 +1,11 @@
 # Challenge 10: Email Notification System (10 points - Low)
 
+**Estimated Time:** 1.5-2 hours
+**Technical Difficulty:** Medium
+
 ## User Story
-**As a** CRM user,  
-**I want** to receive timely email notifications about important events and updates,  
+**As a** CRM user,
+**I want** to receive timely email notifications about important events and updates,
 **So that** I can stay informed about critical changes even when I'm not actively using the system.
 
 ## Business Value
@@ -19,36 +22,33 @@ The current system lacks notification capabilities:
 - No customization options for notification preferences
 - Absence of templating system for consistent messaging
 
-## Requirements
+You will need an SMTP server. For testing, you can use services like Mailtrap (free tier) or Ethereal Email.
+
+## Core Requirements
+*(Required for full points)*
+
 1. Implement email notification service
-   - Create a notification service with email delivery capabilities
-   - Define key notification events (deal stage changes, task assignments, etc.)
-   - Implement queuing system for reliable delivery
-   - Add tracking for email delivery and opens
+   - Create a notification service with email delivery capabilities (nodemailer or similar)
+   - Send email notifications for at least 2 key events (e.g., deal stage change, new contact assigned)
+   - Configure SMTP settings via environment variables
 
-2. Create email templates
-   - Design responsive HTML email templates
-   - Support personalization with dynamic content
-   - Create templates for different notification types
-   - Implement localization support for international teams
+2. Add basic notification preferences
+   - Allow users to opt in/out of specific notification types
+   - Create a simple notification preferences UI
 
-3. Add notification preferences
-   - Allow users to customize which notifications they receive
-   - Implement frequency settings (immediate, digest, etc.)
-   - Support multiple delivery channels (email, in-app, etc.)
-   - Create notification management UI
-
-4. Develop testing and preview functionality
-   - Add template preview capabilities
-   - Implement test sending functionality
-   - Create analytics for notification effectiveness
-   - Support A/B testing for template optimization
+### Relevant Files
+- `backend/src/modules/deal/application/DealUseCases.ts`
+- `backend/src/app.ts`
 
 ## Acceptance Criteria
-- [ ] System sends email notifications for at least 5 key events
+- [ ] System sends email notifications for at least 2 key events
 - [ ] Users can customize their notification preferences
-- [ ] Email templates are responsive and professionally designed
 - [ ] Notification delivery is reliable with proper error handling
 - [ ] Users can opt out of specific notification types
-- [ ] Administrators can create and edit notification templates
-- [ ] System tracks notification delivery and engagement metrics
+
+## Stretch Goals
+*(Optional - demonstrates exceptional skill)*
+
+- Responsive HTML email templates with dynamic content
+- Digest emails (daily/weekly summary instead of individual emails)
+- In-app notifications in addition to email

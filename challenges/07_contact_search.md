@@ -1,8 +1,13 @@
 # Challenge 7: Advanced Contact Search and Filtering (10 points - Low)
 
+**Estimated Time:** 1-1.5 hours
+**Technical Difficulty:** Easy
+
+**Note:** If you completed Challenge 3 (Pagination & Filtering), you already have most of the backend infrastructure for this challenge.
+
 ## User Story
-**As a** sales representative managing hundreds of contacts,  
-**I want** powerful search and filtering capabilities for my contact database,  
+**As a** sales representative managing hundreds of contacts,
+**I want** powerful search and filtering capabilities for my contact database,
 **So that** I can quickly find the right contacts for targeted outreach and relationship management.
 
 ## Business Value
@@ -19,36 +24,31 @@ The current contact management system has limitations:
 - Missing autocomplete functionality for quick lookups
 - Limited options for organizing and categorizing contacts
 
-## Requirements
-1. Implement advanced search functionality
-   - Create a search endpoint with full-text search capabilities
-   - Enable searching across multiple contact fields
-   - Implement relevance-based sorting of search results
-   - Add search history for quick access to previous queries
+## Core Requirements
+*(Required for full points)*
 
-2. Add comprehensive filtering options
-   - Filter contacts by any field (name, company, status, etc.)
-   - Support range filters for dates and numeric values
-   - Allow combining multiple filters with AND/OR logic
-   - Save and reuse filter configurations
+1. Implement search functionality
+   - Create a search endpoint that supports text search across contact fields (name, email, company)
+   - Enable searching across multiple fields simultaneously
 
-3. Create an intuitive search interface
-   - Implement autocomplete suggestions while typing
-   - Show recent and popular searches
-   - Provide clear visual indicators for active filters
-   - Display search results with highlighting of matched terms
+2. Create a search interface
+   - Implement a search input on the contacts page with results display
+   - Provide clear visual indicators for active search terms
 
-4. Optimize for performance
-   - Implement efficient indexing for search operations
-   - Use pagination for search results
-   - Add caching for frequent searches
-   - Show performance metrics for search operations
+### Relevant Files
+- `backend/src/modules/contact/domain/ContactRepository.ts`
+- `backend/src/modules/contact/infrastructure/PostgresContactRepository.ts`
+- `frontend/src/pages/ContactsPage.tsx`
 
 ## Acceptance Criteria
 - [ ] Users can search contacts using partial text matches across multiple fields
-- [ ] Search results appear as the user types with relevant suggestions
-- [ ] Advanced filters can be combined to create precise contact segments
 - [ ] Search and filter operations complete in under 1 second
-- [ ] Users can save searches and filters for future use
-- [ ] Search history is maintained for quick access to previous queries
 - [ ] Interface clearly shows active search terms and filters
+
+## Stretch Goals
+*(Optional - demonstrates exceptional skill)*
+
+- Autocomplete suggestions while typing
+- Search history for quick access to previous queries
+- Saved searches for reuse
+- Highlighting of matched terms in search results

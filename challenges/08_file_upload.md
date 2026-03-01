@@ -1,8 +1,11 @@
 # Challenge 8: File Upload System (10 points - Low)
 
+**Estimated Time:** 1.5-2 hours
+**Technical Difficulty:** Medium
+
 ## User Story
-**As a** sales representative,  
-**I want** to attach files to contacts and deals,  
+**As a** sales representative,
+**I want** to attach files to contacts and deals,
 **So that** I can keep all relevant documents organized and accessible within the CRM.
 
 ## Business Value
@@ -19,36 +22,33 @@ The current system lacks file management capabilities:
 - No preview capabilities for common file types
 - Absence of file organization and categorization
 
-## Requirements
-1. Implement secure file upload functionality
-   - Create file upload endpoints for contacts and deals
-   - Implement secure storage with proper access controls
+## Core Requirements
+*(Required for full points)*
+
+1. Implement file upload functionality
+   - Create file upload endpoints for contacts and deals (using multer or similar)
    - Support multiple file uploads
    - Add file type validation and size limits
 
-2. Create file preview capabilities
-   - Implement in-app previews for common file types (PDF, images, etc.)
-   - Generate thumbnails for visual file identification
-   - Add download options for all file types
-   - Support version history for updated files
+2. Implement file listing and download
+   - List uploaded files for a given contact or deal
+   - Add download endpoints for retrieving files
 
-3. Develop file organization features
-   - Allow files to be categorized and tagged
-   - Implement search functionality for uploaded files
-   - Create a file browser interface
-   - Support bulk operations (download, delete, move)
-
-4. Add security and compliance features
-   - Implement access controls based on user roles
-   - Track file access and modifications
-   - Add expiration dates for sensitive documents
-   - Support encryption for confidential files
+### Relevant Files
+- `backend/src/modules/contact/http/ContactController.ts`
+- `backend/src/modules/deal/http/DealController.ts`
 
 ## Acceptance Criteria
 - [ ] Users can upload files to contacts and deals with proper validation
-- [ ] Common file types can be previewed directly in the application
-- [ ] Files are securely stored with appropriate access controls
-- [ ] Search functionality allows finding files by name, type, or content
-- [ ] File operations (upload, download, delete) are properly logged
+- [ ] Files can be listed and downloaded
 - [ ] System enforces file size limits and acceptable file types
 - [ ] Interface provides clear feedback during upload process
+
+## Stretch Goals
+*(Optional - demonstrates exceptional skill)*
+
+- In-app previews for common file types (PDF, images)
+- File version history for updated documents
+- Encryption for confidential files
+- Bulk upload/download/delete operations
+- Thumbnail generation for image files

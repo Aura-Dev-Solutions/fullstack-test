@@ -1,8 +1,11 @@
 # Challenge 4: Deal Stage History Tracking (15 points - Medium)
 
+**Estimated Time:** 1.5-2 hours
+**Technical Difficulty:** Medium
+
 ## User Story
-**As a** sales director,  
-**I want** to track the complete history of deal stage transitions with timestamps and user information,  
+**As a** sales director,
+**I want** to track the complete history of deal stage transitions with timestamps and user information,
 **So that** I can analyze our sales pipeline efficiency and identify bottlenecks in our sales process.
 
 ## Business Value
@@ -19,32 +22,34 @@ The current deal management system has limitations:
 - Cannot determine how long deals stay in each stage
 - No audit trail of which team member made changes
 
-## Requirements
+## Core Requirements
+*(Required for full points)*
+
 1. Implement deal stage history tracking
-   - Create a history tracking system for deal stage changes
-   - Record timestamps for each stage transition
-   - Track user information for each change
-   - Preserve the complete history of a deal's lifecycle
+   - Create a `DealStageHistory` entity to record stage changes
+   - Intercept stage changes in `updateDeal` and persist a history record with timestamp and userId
+   - Create a `GET /deals/:id/history` endpoint to retrieve stage history
 
-2. Add stage duration analytics
-   - Calculate time spent in each stage
-   - Identify deals that are stuck in a particular stage
-   - Compare actual progression with expected timelines
-
-3. Create timeline visualization
-   - Implement a visual timeline component in the deal detail view
+2. Create timeline visualization
+   - Implement a visual timeline component in the deal detail view (`DealDetailPage`)
    - Show stage transitions with dates and user information
-   - Allow filtering the timeline by date ranges
 
-4. Add reporting capabilities
-   - Create reports showing average time in each stage
-   - Identify trends in deal progression
-   - Compare performance across team members
+### Relevant Files
+- `backend/src/modules/deal/domain/Deal.ts`
+- `backend/src/modules/deal/application/DealUseCases.ts`
+- `backend/src/modules/deal/infrastructure/DealEntity.ts`
+- `frontend/src/pages/DealDetailPage.tsx` (skeleton provided)
 
 ## Acceptance Criteria
 - [ ] Every stage change is recorded with timestamp and user information
 - [ ] Deal detail view shows complete stage history in chronological order
 - [ ] Users can see how long each deal has been in its current stage
-- [ ] Reports show average time spent in each stage across all deals
 - [ ] Timeline visualization clearly shows the progression of deals
 - [ ] System maintains full history even when deals move back to previous stages
+
+## Stretch Goals
+*(Optional - demonstrates exceptional skill)*
+
+- Stage duration analytics (average time spent in each stage across all deals)
+- Comparative reporting across team members
+- Filter timeline by date range

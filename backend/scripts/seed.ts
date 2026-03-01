@@ -21,6 +21,13 @@ async function seed() {
   const contactRepo = AppDataSource.getRepository(ContactEntity)
   const dealRepo = AppDataSource.getRepository(DealEntity)
 
+  // Clear existing data (respect FK order)
+  console.log('Clearing existing data...')
+  await AppDataSource.query(
+    'TRUNCATE TABLE deals, contacts, stages, workflows, users, organizations RESTART IDENTITY CASCADE'
+  )
+  console.log('  Done.')
+
   // 1. Create organization
   console.log('Creating organization...')
   const organization = orgRepo.create({ name: 'Aura Research' })

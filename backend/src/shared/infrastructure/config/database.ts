@@ -1,3 +1,5 @@
+// NOTE: This config helper is not currently used — AppDataSource in data-source.ts reads env vars directly.
+// Kept as a utility for scripts or future use outside of TypeORM.
 export interface DatabaseConfig {
   host: string
   port: number

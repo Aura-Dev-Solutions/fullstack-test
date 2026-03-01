@@ -14,12 +14,12 @@ This document outlines the point system for the technical test challenges. Candi
 | 4. Deal Stage History Tracking | Medium | 15 | Tracking the complete lifecycle of deals |
 | 5. User Role Management | High | 20 | Implementing role-based access control |
 | 6. Dashboard Analytics | Medium | 15 | Creating visualization for key sales metrics |
-| 7. Contact Search and Filtering | Low | 10 | Finding contacts quickly and efficiently |
+| 7. Code Audit & Bug Fixes | High | 15 | Finding and fixing real bugs with root cause analysis |
 | 8. File Upload System | Low | 10 | Attaching documents to contacts and deals |
 | 9. Activity Logging System | Low | 10 | Tracking all user interactions |
-| 10. Email Notification System | Low | 10 | Keeping users informed about important events |
+| 10. Feature Design & Implementation | High | 15 | Designing and building deal assignment end-to-end |
 
-**Total Available Points: 155**
+**Total Available Points: 160**
 
 ## Minimum Requirements
 
@@ -27,15 +27,16 @@ To successfully complete the technical test, candidates must:
 
 1. **Earn a minimum of 70 points** by implementing any combination of challenges
 2. **Complete at least one Critical priority challenge** (Challenge 1 or Challenge 3)
-3. **Complete at least one High priority challenge** (Challenge 2 or Challenge 5)
+3. **Complete at least one High priority challenge** (Challenge 2, 5, 7, or 10)
 
 ## Challenge Dependencies
 
 Some challenges share infrastructure or modify the same files. Keep these relationships in mind when planning your implementation:
 
 - **Challenge 1 & Challenge 5** both modify the auth middleware and JWT token structure. If implementing both, design Challenge 1 with role extensibility in mind (e.g., include a `role` field in the JWT payload from the start).
-- **Challenge 3 & Challenge 7** have overlapping functionality. If you implement Challenge 3 (Pagination & Filtering), you already have approximately 70% of the backend infrastructure needed for Challenge 7 (Contact Search).
 - **Challenge 4 & Challenge 6** share queries over deals data. Implementing one can simplify the other.
+- **Challenge 7** requires reading across the entire codebase. Tackle it after getting familiar with the code, not first.
+- **Challenge 10** integrates naturally with Challenge 5 (Roles) — if you implement both, consider how assignee visibility interacts with role-based access.
 
 ## Bonus Points
 

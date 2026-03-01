@@ -23,8 +23,10 @@ As a candidate, you are expected to:
 1. **Complete Business-Critical Challenges**: Implement solutions for the challenges in the `/challenges` directory
 2. **Understand the Existing Codebase**: Navigate and comprehend the architecture and patterns used
 3. **Implement New Features**: Add functionality to both frontend and backend components
-4. **Write Tests**: Ensure proper test coverage for your implementations
-5. **Document Your Work**: Provide clear documentation of your approach and decisions
+4. **Debug Real Issues**: Some challenges require finding and fixing existing bugs — read the code critically
+5. **Make Design Decisions**: Some challenges are intentionally open-ended. Document your decisions and tradeoffs
+6. **Write Tests**: Ensure proper test coverage for your implementations
+7. **Document Your Work**: Provide clear documentation of your approach and decisions
 
 ## Challenge Point System
 
@@ -40,7 +42,9 @@ This technical test uses a point-based evaluation system:
 
 ### Challenge Priorities
 
-Importantly, challenge priorities (Critical, High, Medium, Low) reflect **business value** rather than technical difficulty. A Critical priority challenge addresses a core business need, while a Low priority challenge, though still valuable, may have less immediate impact on business operations.
+Challenge priorities (Critical, High, Medium, Low) reflect **business value** rather than technical difficulty. A Critical priority challenge addresses a core business need, while a Low priority challenge, though still valuable, may have less immediate impact on business operations.
+
+Not all challenges are implementation challenges. **Challenge 7** asks you to debug and fix real issues in the codebase — it evaluates how you read code and reason about root causes. **Challenge 10** is design-first — the requirement is intentionally brief, and we evaluate the decisions you make and how you justify them in your PR.
 
 Detailed information about the point system can be found in the `POINT_SYSTEM.md` file, and each challenge file includes its point value in the title.
 

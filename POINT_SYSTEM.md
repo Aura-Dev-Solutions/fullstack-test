@@ -4,51 +4,49 @@
 
 This document outlines the point system for the technical test challenges. Candidates must earn a minimum number of points to successfully complete the test. Points are allocated based on the business criticality and type of skill evaluated.
 
-## Point Allocation
+## Mandatory Challenges
 
-| # | Challenge | Priority | Points | What It Evaluates |
-|---|-----------|----------|--------|-------------------|
-| 1 | [Code Audit & Bug Fixes](./challenges/01_code_audit.md) | High | 15 | Code reading, debugging, root cause analysis |
-| 2 | [Feature Design & Implementation](./challenges/02_feature_design.md) | High | 15 | Design thinking, tradeoffs, documentation |
-| 3 | [Secure Authentication System](./challenges/03_secure_authentication.md) | Critical | 20 | Fullstack integration, security fundamentals |
-| 4 | [Data Validation & Error Handling](./challenges/04_data_validation.md) | High | 20 | Data integrity, UX, cross-layer consistency |
-| 5 | [Pagination and Advanced Filtering](./challenges/05_pagination_and_filtering.md) | Critical | 25 | DB querying, API design, frontend state |
-| 6 | [User Role Management](./challenges/06_user_role_management.md) | High | 20 | Backend architecture, middleware, access control |
-| 7 | [Deal Stage History Tracking](./challenges/07_deal_stage_history.md) | Medium | 15 | Schema design, audit patterns, timeline UI |
-| 8 | [Dashboard Analytics](./challenges/08_dashboard_analytics.md) | Medium | 15 | Frontend depth, data visualization |
-| 9 | [Activity Logging System](./challenges/09_activity_logging.md) | Low | 10 | Domain modeling, data association |
-| 10 | [File Upload System](./challenges/10_file_upload.md) | Low | 10 | Infrastructure, file handling, validation |
+All candidates must complete these four challenges. Together they cover the core skills we evaluate and total 70 points.
+
+| # | Challenge | Points | What It Evaluates |
+|---|-----------|--------|-------------------|
+| 1 | [Code Audit & Bug Fixes](./challenges/01_code_audit.md) | 15 | Code reading, debugging, root cause analysis |
+| 2 | [Feature Design & Implementation](./challenges/02_feature_design.md) | 15 | Design thinking, tradeoffs, documentation |
+| 3 | [Secure Authentication System](./challenges/03_secure_authentication.md) | 20 | Fullstack integration, security fundamentals |
+| 4 | [Data Validation & Error Handling](./challenges/04_data_validation.md) | 20 | Data integrity, UX, cross-layer consistency |
+
+**Mandatory Total: 70 points**
+
+## Optional Challenges
+
+Complete any of these to demonstrate additional depth. They are not required to pass, but they differentiate strong candidates.
+
+| # | Challenge | Points | What It Evaluates |
+|---|-----------|--------|-------------------|
+| 5 | [Pagination and Advanced Filtering](./challenges/05_pagination_and_filtering.md) | 25 | DB querying, API design, frontend state |
+| 6 | [User Role Management](./challenges/06_user_role_management.md) | 20 | Backend architecture, middleware, access control |
+| 7 | [Deal Stage History Tracking](./challenges/07_deal_stage_history.md) | 15 | Schema design, audit patterns, timeline UI |
+| 8 | [Dashboard Analytics](./challenges/08_dashboard_analytics.md) | 15 | Frontend depth, data visualization |
+| 9 | [Activity Logging System](./challenges/09_activity_logging.md) | 10 | Domain modeling, data association |
+| 10 | [File Upload System](./challenges/10_file_upload.md) | 10 | Infrastructure, file handling, validation |
 
 **Total Available Points: 165**
 
-## Minimum Requirements
+## Recommended Sequence
 
-To successfully complete the technical test, candidates must:
-
-1. **Earn a minimum of 70 points** by implementing any combination of challenges
-2. **Complete at least one Critical priority challenge** ([Challenge 3](./challenges/03_secure_authentication.md) or [Challenge 5](./challenges/05_pagination_and_filtering.md))
-3. **Complete at least one High priority challenge** ([1](./challenges/01_code_audit.md), [2](./challenges/02_feature_design.md), [4](./challenges/04_data_validation.md), or [6](./challenges/06_user_role_management.md))
-
-## Recommended Approach for Candidates
-
-The challenges are ordered intentionally. This sequence is recommended:
+The challenges are ordered intentionally. Follow this sequence:
 
 ### Step 1 — Read before you code ([Challenge 1](./challenges/01_code_audit.md))
-Start with the Code Audit. This forces you to read the entire codebase critically before touching anything. Strong candidates always understand the system before extending it. This challenge also reveals how you communicate technical findings.
+Start with the Code Audit. Read the entire codebase critically before touching anything. Strong candidates always understand the system before extending it.
 
 ### Step 2 — Design before you implement ([Challenge 2](./challenges/02_feature_design.md))
-The Feature Design challenge has an intentionally brief requirement. Read it, think through the tradeoffs, and document your decisions. We evaluate the reasoning in your PR as much as the code itself.
+The Feature Design challenge has an intentionally brief requirement. Think through the tradeoffs and document your decisions in the PR. We evaluate the reasoning as much as the code.
 
-### Step 3 — Build the core (Challenges [3](./challenges/03_secure_authentication.md)–[6](./challenges/06_user_role_management.md))
-These are the fullstack fundamentals. Choose based on your strengths to reach 70 points:
+### Step 3 — Build the core ([Challenges 3](./challenges/03_secure_authentication.md) & [4](./challenges/04_data_validation.md))
+Implement the two mandatory implementation challenges in order. Challenge 3 establishes the auth foundation; Challenge 4 builds validation on top of it.
 
-- **Backend-leaning**: [Challenge 3](./challenges/03_secure_authentication.md) (Auth) + [Challenge 6](./challenges/06_user_role_management.md) (Roles) = 40pts from backend depth
-- **Frontend-leaning**: [Challenge 4](./challenges/04_data_validation.md) (Validation) + [Challenge 8](./challenges/08_dashboard_analytics.md) (Dashboard) = 35pts, UI-heavy
-- **Balanced**: [Challenge 3](./challenges/03_secure_authentication.md) (Auth) + [Challenge 4](./challenges/04_data_validation.md) (Validation) = 40pts across both layers
-- **Query depth**: [Challenge 5](./challenges/05_pagination_and_filtering.md) (Pagination) alone = 25pts and requires real TypeORM knowledge
-
-### Step 4 — Reach 70 points your way
-After the mandatory challenges, pick what best showcases your strengths. There is no wrong path — the choices you make tell us as much as the implementation.
+### Step 4 — Go further (optional)
+After completing all 4 mandatory challenges, pick any optional challenge that best showcases your strengths. The choices you make and the quality of each tell us more than the raw point total.
 
 ## Challenge Dependencies
 

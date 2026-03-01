@@ -10,22 +10,27 @@ This repository is both a working CRM application and a technical assessment. Be
 | 2 | [`POINT_SYSTEM.md`](./POINT_SYSTEM.md) | Point values, minimum requirements, and **recommended approach** |
 | 3 | [`challenges/`](./challenges/) | The 10 challenges — links below |
 
-### Challenges
+### Mandatory Challenges (all 4 required — 70 pts total)
 
-| # | Challenge | Priority | Points |
-|---|-----------|----------|--------|
-| 1 | [Code Audit & Bug Fixes](./challenges/01_code_audit.md) | High | 15 |
-| 2 | [Feature Design & Implementation](./challenges/02_feature_design.md) | High | 15 |
-| 3 | [Secure Authentication System](./challenges/03_secure_authentication.md) | Critical | 20 |
-| 4 | [Data Validation & Error Handling](./challenges/04_data_validation.md) | High | 20 |
-| 5 | [Pagination and Advanced Filtering](./challenges/05_pagination_and_filtering.md) | Critical | 25 |
-| 6 | [User Role Management](./challenges/06_user_role_management.md) | High | 20 |
-| 7 | [Deal Stage History Tracking](./challenges/07_deal_stage_history.md) | Medium | 15 |
-| 8 | [Dashboard Analytics](./challenges/08_dashboard_analytics.md) | Medium | 15 |
-| 9 | [Activity Logging System](./challenges/09_activity_logging.md) | Low | 10 |
-| 10 | [File Upload System](./challenges/10_file_upload.md) | Low | 10 |
+| # | Challenge | Points |
+|---|-----------|--------|
+| 1 | [Code Audit & Bug Fixes](./challenges/01_code_audit.md) | 15 |
+| 2 | [Feature Design & Implementation](./challenges/02_feature_design.md) | 15 |
+| 3 | [Secure Authentication System](./challenges/03_secure_authentication.md) | 20 |
+| 4 | [Data Validation & Error Handling](./challenges/04_data_validation.md) | 20 |
 
-**The order matters.** The challenges are numbered intentionally — start with Challenge 1 before looking at the others. Reading the codebase before implementing is part of what we're evaluating.
+### Optional Challenges (differentiation — complete any to go beyond)
+
+| # | Challenge | Points |
+|---|-----------|--------|
+| 5 | [Pagination and Advanced Filtering](./challenges/05_pagination_and_filtering.md) | 25 |
+| 6 | [User Role Management](./challenges/06_user_role_management.md) | 20 |
+| 7 | [Deal Stage History Tracking](./challenges/07_deal_stage_history.md) | 15 |
+| 8 | [Dashboard Analytics](./challenges/08_dashboard_analytics.md) | 15 |
+| 9 | [Activity Logging System](./challenges/09_activity_logging.md) | 10 |
+| 10 | [File Upload System](./challenges/10_file_upload.md) | 10 |
+
+**The order matters.** Start with Challenge 1 — reading the codebase critically before implementing is part of what we evaluate.
 
 Once you've read those documents, come back here for setup instructions.
 

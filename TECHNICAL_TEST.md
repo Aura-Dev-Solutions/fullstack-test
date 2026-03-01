@@ -30,23 +30,22 @@ As a candidate, you are expected to:
 
 ## Challenge Point System
 
-This technical test uses a point-based evaluation system:
+This technical test uses a fixed-scope structure:
 
-- Each challenge has a specific point value based on its business importance
-- You must earn a minimum of 70 points to successfully complete the test
-- You must complete at least one Critical priority challenge (20-25 points)
-- You must complete at least one High priority challenge (15-20 points each)
-- The remaining points can be earned by completing any combination of challenges
+- **Challenges [1](./challenges/01_code_audit.md)–[4](./challenges/04_data_validation.md) are mandatory.** Every candidate completes the same four challenges (70 points total).
+- **Challenges [5](./challenges/05_pagination_and_filtering.md)–[10](./challenges/10_file_upload.md) are optional.** Complete any of them to demonstrate additional depth and differentiate yourself.
+- Quality of implementation matters more than completing optional challenges.
 
-**Important Note:** You are NOT required to complete all challenges. Focus on reaching the minimum 70 points by implementing the challenges that best showcase your skills. Quality of implementation is more important than quantity of challenges completed.
+### Why these four challenges
 
-### Challenge Priorities
+Each mandatory challenge tests a distinct, non-overlapping skill:
 
-Challenge priorities (Critical, High, Medium, Low) reflect **business value** rather than technical difficulty. A Critical priority challenge addresses a core business need, while a Low priority challenge, though still valuable, may have less immediate impact on business operations.
+- **[Challenge 1](./challenges/01_code_audit.md) — Code Audit:** Can you read an unfamiliar codebase and identify root causes rather than symptoms?
+- **[Challenge 2](./challenges/02_feature_design.md) — Feature Design:** How do you reason about design tradeoffs? We evaluate your PR description as much as your code.
+- **[Challenge 3](./challenges/03_secure_authentication.md) — Secure Auth:** Can you build a critical, security-sensitive backend feature fullstack?
+- **[Challenge 4](./challenges/04_data_validation.md) — Data Validation:** Do you enforce data integrity consistently across backend and frontend?
 
-Not all challenges are implementation challenges. **[Challenge 1](./challenges/01_code_audit.md)** asks you to debug and fix real issues in the codebase — it evaluates how you read code and reason about root causes. **[Challenge 2](./challenges/02_feature_design.md)** is design-first — the requirement is intentionally brief, and we evaluate the decisions you make and how you justify them in your PR.
-
-**The challenges are ordered intentionally.** We recommend following the sequence: start by reading the codebase critically ([Challenge 1](./challenges/01_code_audit.md)), then design before you implement ([Challenge 2](./challenges/02_feature_design.md)), then build core features based on your strengths (Challenges [3](./challenges/03_secure_authentication.md)–[6](./challenges/06_user_role_management.md)). See [`POINT_SYSTEM.md`](./POINT_SYSTEM.md) for a detailed recommended approach.
+**The challenges are ordered intentionally.** Follow the sequence: read first ([Challenge 1](./challenges/01_code_audit.md)), design second ([Challenge 2](./challenges/02_feature_design.md)), then implement ([Challenges 3](./challenges/03_secure_authentication.md) and [4](./challenges/04_data_validation.md)). See [`POINT_SYSTEM.md`](./POINT_SYSTEM.md) for details.
 
 Detailed information about the point system can be found in [`POINT_SYSTEM.md`](./POINT_SYSTEM.md), and each challenge file includes its point value in the title.
 
@@ -83,9 +82,12 @@ Your submission will be evaluated primarily on **successful challenge completion
 1. Fork this repository to your GitHub account
 2. Set up the project following instructions in [`README.md`](./README.md)
 3. Review the challenges in [`/challenges`](./challenges/) and their point values in [`POINT_SYSTEM.md`](./POINT_SYSTEM.md)
-4. Complete enough challenges to earn at least 70 points, including:
-   - At least one Critical challenge ([Challenge 3](./challenges/03_secure_authentication.md) or [Challenge 5](./challenges/05_pagination_and_filtering.md))
-   - At least one High priority challenge ([1](./challenges/01_code_audit.md), [2](./challenges/02_feature_design.md), [4](./challenges/04_data_validation.md), or [6](./challenges/06_user_role_management.md))
+4. Complete all 4 mandatory challenges:
+   - [Challenge 1](./challenges/01_code_audit.md) — Code Audit & Bug Fixes (15 pts)
+   - [Challenge 2](./challenges/02_feature_design.md) — Feature Design & Implementation (15 pts)
+   - [Challenge 3](./challenges/03_secure_authentication.md) — Secure Authentication System (20 pts)
+   - [Challenge 4](./challenges/04_data_validation.md) — Data Validation & Error Handling (20 pts)
+   - Optionally, complete any of [Challenges 5–10](./challenges/) to differentiate yourself
 5. Create a single Pull Request against the main branch with your implementations
 6. In your PR description, include:
    - List of completed challenges with their point values

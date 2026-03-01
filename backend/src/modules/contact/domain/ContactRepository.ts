@@ -1,6 +1,7 @@
 import type { Contact, CreateContactDTO, UpdateContactDTO } from './Contact'
 
 export interface ContactRepository {
+  // TODO [Challenge 3]: Add PaginationOptions parameter: findAllByOrganization(organizationId: string, options?: PaginationOptions): Promise<PaginatedResult<Contact>>
   findAllByOrganization(organizationId: string): Promise<Contact[]>
   findById(id: string): Promise<Contact | null>
   create(data: CreateContactDTO): Promise<Contact>

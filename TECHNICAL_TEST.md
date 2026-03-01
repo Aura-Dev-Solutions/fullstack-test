@@ -20,7 +20,7 @@ The purpose of this technical test is to evaluate your skills in:
 
 As a candidate, you are expected to:
 
-1. **Complete Business-Critical Challenges**: Implement solutions for the challenges in the `/challenges` directory
+1. **Complete Business-Critical Challenges**: Implement solutions for the challenges in the [`/challenges`](./challenges/) directory
 2. **Understand the Existing Codebase**: Navigate and comprehend the architecture and patterns used
 3. **Implement New Features**: Add functionality to both frontend and backend components
 4. **Debug Real Issues**: Some challenges require finding and fixing existing bugs — read the code critically
@@ -44,11 +44,11 @@ This technical test uses a point-based evaluation system:
 
 Challenge priorities (Critical, High, Medium, Low) reflect **business value** rather than technical difficulty. A Critical priority challenge addresses a core business need, while a Low priority challenge, though still valuable, may have less immediate impact on business operations.
 
-Not all challenges are implementation challenges. **Challenge 1** asks you to debug and fix real issues in the codebase — it evaluates how you read code and reason about root causes. **Challenge 2** is design-first — the requirement is intentionally brief, and we evaluate the decisions you make and how you justify them in your PR.
+Not all challenges are implementation challenges. **[Challenge 1](./challenges/01_code_audit.md)** asks you to debug and fix real issues in the codebase — it evaluates how you read code and reason about root causes. **[Challenge 2](./challenges/02_feature_design.md)** is design-first — the requirement is intentionally brief, and we evaluate the decisions you make and how you justify them in your PR.
 
-**The challenges are ordered intentionally.** We recommend following the sequence: start by reading the codebase critically (Challenge 1), then design before you implement (Challenge 2), then build core features based on your strengths (Challenges 3–6). See `POINT_SYSTEM.md` for a detailed recommended approach.
+**The challenges are ordered intentionally.** We recommend following the sequence: start by reading the codebase critically ([Challenge 1](./challenges/01_code_audit.md)), then design before you implement ([Challenge 2](./challenges/02_feature_design.md)), then build core features based on your strengths (Challenges [3](./challenges/03_secure_authentication.md)–[6](./challenges/06_user_role_management.md)). See [`POINT_SYSTEM.md`](./POINT_SYSTEM.md) for a detailed recommended approach.
 
-Detailed information about the point system can be found in the `POINT_SYSTEM.md` file, and each challenge file includes its point value in the title.
+Detailed information about the point system can be found in [`POINT_SYSTEM.md`](./POINT_SYSTEM.md), and each challenge file includes its point value in the title.
 
 ## Technical Stack
 
@@ -81,11 +81,11 @@ Your submission will be evaluated primarily on **successful challenge completion
 ## Getting Started & Submission Process
 
 1. Fork this repository to your GitHub account
-2. Set up the project following instructions in README.md
-3. Review the challenges in `/challenges` and their point values
+2. Set up the project following instructions in [`README.md`](./README.md)
+3. Review the challenges in [`/challenges`](./challenges/) and their point values in [`POINT_SYSTEM.md`](./POINT_SYSTEM.md)
 4. Complete enough challenges to earn at least 70 points, including:
-   - At least one Critical challenge (Challenge 3 or Challenge 5)
-   - At least one High priority challenge (Challenge 1, 2, 4, or 6)
+   - At least one Critical challenge ([Challenge 3](./challenges/03_secure_authentication.md) or [Challenge 5](./challenges/05_pagination_and_filtering.md))
+   - At least one High priority challenge ([1](./challenges/01_code_audit.md), [2](./challenges/02_feature_design.md), [4](./challenges/04_data_validation.md), or [6](./challenges/06_user_role_management.md))
 5. Create a single Pull Request against the main branch with your implementations
 6. In your PR description, include:
    - List of completed challenges with their point values

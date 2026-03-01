@@ -32,7 +32,7 @@ This technical test uses a point-based evaluation system:
 
 - Each challenge has a specific point value based on its business importance
 - You must earn a minimum of 70 points to successfully complete the test
-- You must complete at least one Critical priority challenge (30 points)
+- You must complete at least one Critical priority challenge (20-25 points)
 - You must complete at least one High priority challenge (20 points)
 - The remaining points can be earned by completing any combination of challenges
 
@@ -70,6 +70,7 @@ Your submission will be evaluated primarily on **successful challenge completion
 3. **Architecture**: Proper separation of concerns and adherence to clean architecture principles
 4. **Testing**: Comprehensive test coverage for your implementations
 5. **Documentation**: Clear explanation of your approach, decisions, and trade-offs
+6. **Dependencies**: You may install additional dependencies (e.g., validation libraries, chart libraries). Justify your choices in the PR description.
 
 ## Getting Started & Submission Process
 
@@ -77,9 +78,9 @@ Your submission will be evaluated primarily on **successful challenge completion
 2. Set up the project following instructions in README.md
 3. Review the challenges in `/challenges` and their point values
 4. Complete enough challenges to earn at least 70 points, including:
-   - At least one Critical challenge (30 points)
-   - At least one High priority challenge (20 points)
-5. Create a single Pull Request with your implementations
+   - At least one Critical challenge (Challenge 1 or Challenge 3)
+   - At least one High priority challenge (Challenge 2 or Challenge 5)
+5. Create a single Pull Request against the main branch with your implementations
 6. In your PR description, include:
    - List of completed challenges with their point values
    - Total points earned
@@ -88,7 +89,7 @@ Your submission will be evaluated primarily on **successful challenge completion
 
 ## Time Allocation
 
-You are expected to spend approximately 4-6 hours on this test. We value quality over quantity, so focus on delivering well-structured and tested code rather than implementing all features if time is limited.
+You are expected to spend approximately 6-8 hours on this test. We value quality over quantity, so focus on delivering well-structured and tested code rather than implementing all features if time is limited.
 
 ## Support
 

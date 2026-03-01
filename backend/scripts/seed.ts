@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import 'reflect-metadata'
 import { AppDataSource } from '../src/shared/infrastructure/database/data-source'
 import { OrganizationEntity } from '../src/modules/organization/infrastructure/OrganizationEntity'

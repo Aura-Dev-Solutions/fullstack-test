@@ -1,4 +1,4 @@
-# Challenge 5: User Role Management (20 points - High)
+# Challenge 6: User Role Management (20 points - High)
 
 **Estimated Time:** 2-3 hours
 **Technical Difficulty:** Hard

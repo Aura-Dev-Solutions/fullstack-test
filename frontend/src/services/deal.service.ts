@@ -29,7 +29,7 @@ export interface UpdateDealDTO {
 }
 
 export const dealService = {
-  // TODO [Challenge 3]: Add PaginationOptions parameter: getAll(options?: PaginationOptions) => api.get('/deals', { params: options })
+  // TODO [Challenge 5]: Add PaginationOptions parameter: getAll(options?: PaginationOptions) => api.get('/deals', { params: options })
   getAll: () => api.get<Deal[]>('/deals'),
 
   getById: (id: string) => api.get<Deal>(`/deals/${id}`),

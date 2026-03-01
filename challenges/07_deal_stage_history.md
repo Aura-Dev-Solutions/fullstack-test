@@ -1,4 +1,4 @@
-# Challenge 4: Deal Stage History Tracking (15 points - Medium)
+# Challenge 7: Deal Stage History Tracking (15 points - Medium)
 
 **Estimated Time:** 1.5-2 hours
 **Technical Difficulty:** Medium

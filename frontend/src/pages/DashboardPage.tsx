@@ -1,4 +1,4 @@
-// TODO [Challenge 6]: Install a chart library (e.g. recharts) and implement pipeline visualizations
+// TODO [Challenge 8]: Install a chart library (e.g. recharts) and implement pipeline visualizations
 // Suggested: npm install recharts @types/recharts
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -55,7 +55,7 @@ export function DashboardPage() {
         <p className="text-slate-500 mt-1">Here's what's happening with your CRM today.</p>
       </div>
 
-      {/* TODO [Challenge 6]: Add charts below — pipeline value by stage (bar/pie chart), deal status distribution, win rate over time */}
+      {/* TODO [Challenge 8]: Add charts below — pipeline value by stage (bar/pie chart), deal status distribution, win rate over time */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Contacts" value={stats.contacts} icon="👥" />
         <StatCard title="Total Deals" value={stats.deals} icon="📊" />

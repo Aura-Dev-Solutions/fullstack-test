@@ -2,22 +2,22 @@
 
 ## Overview
 
-This document outlines the point system for the technical test challenges. Candidates must earn a minimum number of points to successfully complete the test. Points are allocated based on the business criticality and complexity of each challenge.
+This document outlines the point system for the technical test challenges. Candidates must earn a minimum number of points to successfully complete the test. Points are allocated based on the business criticality and type of skill evaluated.
 
 ## Point Allocation
 
-| Challenge | Priority | Points | Description |
-|-----------|----------|--------|-------------|
-| 1. Secure Authentication System | Critical | 20 | Implementing refresh tokens and persistent sessions |
-| 2. Data Validation & Error Handling | High | 20 | Ensuring data integrity across the application |
-| 3. Pagination and Advanced Filtering | Critical | 25 | Managing large datasets efficiently |
-| 4. Deal Stage History Tracking | Medium | 15 | Tracking the complete lifecycle of deals |
-| 5. User Role Management | High | 20 | Implementing role-based access control |
-| 6. Dashboard Analytics | Medium | 15 | Creating visualization for key sales metrics |
-| 7. Code Audit & Bug Fixes | High | 15 | Finding and fixing real bugs with root cause analysis |
-| 8. File Upload System | Low | 10 | Attaching documents to contacts and deals |
-| 9. Activity Logging System | Low | 10 | Tracking all user interactions |
-| 10. Feature Design & Implementation | High | 15 | Designing and building deal assignment end-to-end |
+| # | Challenge | Priority | Points | What It Evaluates |
+|---|-----------|----------|--------|-------------------|
+| 1 | Code Audit & Bug Fixes | High | 15 | Code reading, debugging, root cause analysis |
+| 2 | Feature Design & Implementation | High | 15 | Design thinking, tradeoffs, documentation |
+| 3 | Secure Authentication System | Critical | 20 | Fullstack integration, security fundamentals |
+| 4 | Data Validation & Error Handling | High | 20 | Data integrity, UX, cross-layer consistency |
+| 5 | Pagination and Advanced Filtering | Critical | 25 | DB querying, API design, frontend state |
+| 6 | User Role Management | High | 20 | Backend architecture, middleware, access control |
+| 7 | Deal Stage History Tracking | Medium | 15 | Schema design, audit patterns, timeline UI |
+| 8 | Dashboard Analytics | Medium | 15 | Frontend depth, data visualization |
+| 9 | Activity Logging System | Low | 10 | Domain modeling, data association |
+| 10 | File Upload System | Low | 10 | Infrastructure, file handling, validation |
 
 **Total Available Points: 160**
 
@@ -26,17 +26,38 @@ This document outlines the point system for the technical test challenges. Candi
 To successfully complete the technical test, candidates must:
 
 1. **Earn a minimum of 70 points** by implementing any combination of challenges
-2. **Complete at least one Critical priority challenge** (Challenge 1 or Challenge 3)
-3. **Complete at least one High priority challenge** (Challenge 2, 5, 7, or 10)
+2. **Complete at least one Critical priority challenge** (Challenge 3 or Challenge 5)
+3. **Complete at least one High priority challenge** (Challenge 1, 2, 4, or 6)
+
+## Recommended Approach for Candidates
+
+The challenges are ordered intentionally. This sequence is recommended:
+
+### Step 1 — Read before you code (Challenge 1)
+Start with the Code Audit. This forces you to read the entire codebase critically before touching anything. Strong candidates always understand the system before extending it. This challenge also reveals how you communicate technical findings.
+
+### Step 2 — Design before you implement (Challenge 2)
+The Feature Design challenge has an intentionally brief requirement. Read it, think through the tradeoffs, and document your decisions. We evaluate the reasoning in your PR as much as the code itself.
+
+### Step 3 — Build the core (Challenges 3–6)
+These are the fullstack fundamentals. Choose based on your strengths to reach 70 points:
+
+- **Backend-leaning**: Challenge 3 (Auth) + Challenge 6 (Roles) = 40pts from backend depth
+- **Frontend-leaning**: Challenge 4 (Validation) + Challenge 8 (Dashboard) = 35pts, UI-heavy
+- **Balanced**: Challenge 3 (Auth) + Challenge 4 (Validation) = 40pts across both layers
+- **Query depth**: Challenge 5 (Pagination) alone = 25pts and requires real TypeORM knowledge
+
+### Step 4 — Reach 70 points your way
+After the mandatory challenges, pick what best showcases your strengths. There is no wrong path — the choices you make tell us as much as the implementation.
 
 ## Challenge Dependencies
 
-Some challenges share infrastructure or modify the same files. Keep these relationships in mind when planning your implementation:
+Keep these relationships in mind when planning your implementation:
 
-- **Challenge 1 & Challenge 5** both modify the auth middleware and JWT token structure. If implementing both, design Challenge 1 with role extensibility in mind (e.g., include a `role` field in the JWT payload from the start).
-- **Challenge 4 & Challenge 6** share queries over deals data. Implementing one can simplify the other.
-- **Challenge 7** requires reading across the entire codebase. Tackle it after getting familiar with the code, not first.
-- **Challenge 10** integrates naturally with Challenge 5 (Roles) — if you implement both, consider how assignee visibility interacts with role-based access.
+- **Challenge 3 & Challenge 6** both modify the auth middleware and JWT token structure. If implementing both, design Challenge 3 with a `role` field in the JWT payload from the start.
+- **Challenge 7** (Deal Stage History) has a frontend skeleton already provided in `DealDetailPage.tsx`.
+- **Challenge 7 & Challenge 8** (Dashboard) share deal data queries. Implementing one simplifies the other.
+- **Challenge 2** (Feature Design) integrates naturally with Challenge 6 (Roles) — consider how deal assignment interacts with user permissions.
 
 ## Bonus Points
 
@@ -44,27 +65,17 @@ Candidates can earn bonus points for:
 
 | Bonus Category | Points | Description |
 |----------------|--------|-------------|
-| Code Quality | 1-5 | Clean, maintainable code with proper comments |
-| Test Coverage | 1-5 | Comprehensive test coverage for implementations |
-| Documentation | 1-5 | Clear explanation of design decisions and approach |
-| UI/UX | 1-5 | Intuitive and responsive user interfaces |
+| Code Quality | 1-5 | Clean, maintainable code that follows existing patterns |
+| Test Coverage | 1-5 | Meaningful tests, not just coverage for its own sake |
+| Documentation | 1-5 | Clear explanation of design decisions and tradeoffs in the PR |
+| UI/UX | 1-5 | Intuitive, consistent interfaces that match the existing design system |
 
-## Evaluation Strategy
+## Evaluation Criteria (for reviewers)
 
-We recommend candidates approach the challenges in this order:
+Beyond points, submissions are evaluated on:
 
-1. Start with a Critical priority challenge (20-25 points)
-2. Choose at least one High priority challenge (20 points each)
-3. Select Medium or Low priority challenges based on your strengths and interests to reach the minimum 70 points
-4. Focus on quality over quantity - a well-implemented challenge earns full points
-
-## Submission Evaluation
-
-Your submission will be evaluated based on:
-
-1. Total points earned from implemented challenges
-2. Quality of implementation for each challenge
-3. Adherence to the existing architecture and code patterns
-4. Bonus points earned for exceptional quality
-
-Remember that the goal is to demonstrate your skills and approach to problem-solving, not necessarily to complete all challenges.
+1. **Code reading**: Does Challenge 1 show they understood the root causes, not just the symptoms?
+2. **Design thinking**: Does Challenge 2's PR description reveal real tradeoffs considered?
+3. **Architecture adherence**: Do their implementations follow the existing clean architecture layers?
+4. **Cross-layer consistency**: Do their backend and frontend implementations match in behavior and types?
+5. **Test quality**: Are tests meaningful or just written to check a box?

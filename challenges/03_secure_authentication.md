@@ -1,4 +1,4 @@
-# Challenge 1: Secure Authentication System (20 points - Critical)
+# Challenge 3: Secure Authentication System (20 points - Critical)
 
 **Estimated Time:** 2-3 hours
 **Technical Difficulty:** Hard

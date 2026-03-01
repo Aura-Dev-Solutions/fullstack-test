@@ -20,7 +20,7 @@ export function DealsPage() {
   }, [])
 
   async function loadData() {
-    // TODO [Challenge 3]: Add pagination parameters to this request and handle PaginatedResult response
+    // TODO [Challenge 5]: Add pagination parameters to this request and handle PaginatedResult response
     try {
       const [dealsData, workflowsData, contactsData] = await Promise.all([
         dealService.getAll(),
@@ -57,7 +57,7 @@ export function DealsPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
-    // TODO [Challenge 2]: Add form validation before submitting
+    // TODO [Challenge 4]: Add form validation before submitting
     // Validate: title (required), value (must be a positive number), stageId (required)
 
     try {

@@ -44,7 +44,9 @@ This technical test uses a point-based evaluation system:
 
 Challenge priorities (Critical, High, Medium, Low) reflect **business value** rather than technical difficulty. A Critical priority challenge addresses a core business need, while a Low priority challenge, though still valuable, may have less immediate impact on business operations.
 
-Not all challenges are implementation challenges. **Challenge 7** asks you to debug and fix real issues in the codebase — it evaluates how you read code and reason about root causes. **Challenge 10** is design-first — the requirement is intentionally brief, and we evaluate the decisions you make and how you justify them in your PR.
+Not all challenges are implementation challenges. **Challenge 1** asks you to debug and fix real issues in the codebase — it evaluates how you read code and reason about root causes. **Challenge 2** is design-first — the requirement is intentionally brief, and we evaluate the decisions you make and how you justify them in your PR.
+
+**The challenges are ordered intentionally.** We recommend following the sequence: start by reading the codebase critically (Challenge 1), then design before you implement (Challenge 2), then build core features based on your strengths (Challenges 3–6). See `POINT_SYSTEM.md` for a detailed recommended approach.
 
 Detailed information about the point system can be found in the `POINT_SYSTEM.md` file, and each challenge file includes its point value in the title.
 
@@ -82,8 +84,8 @@ Your submission will be evaluated primarily on **successful challenge completion
 2. Set up the project following instructions in README.md
 3. Review the challenges in `/challenges` and their point values
 4. Complete enough challenges to earn at least 70 points, including:
-   - At least one Critical challenge (Challenge 1 or Challenge 3)
-   - At least one High priority challenge (Challenge 2 or Challenge 5)
+   - At least one Critical challenge (Challenge 3 or Challenge 5)
+   - At least one High priority challenge (Challenge 1, 2, 4, or 6)
 5. Create a single Pull Request against the main branch with your implementations
 6. In your PR description, include:
    - List of completed challenges with their point values

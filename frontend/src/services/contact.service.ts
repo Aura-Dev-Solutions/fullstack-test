@@ -22,7 +22,7 @@ export interface UpdateContactDTO {
 }
 
 export const contactService = {
-  // TODO [Challenge 3]: Add PaginationOptions parameter: getAll(options?: PaginationOptions) => api.get('/contacts', { params: options })
+  // TODO [Challenge 5]: Add PaginationOptions parameter: getAll(options?: PaginationOptions) => api.get('/contacts', { params: options })
   getAll: () => api.get<Contact[]>('/contacts'),
 
   getById: (id: string) => api.get<Contact>(`/contacts/${id}`),

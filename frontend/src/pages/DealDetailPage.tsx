@@ -102,7 +102,7 @@ export function DealDetailPage() {
 
       <div className="bg-white rounded-xl shadow-sm p-6">
         <h2 className="text-lg font-semibold text-slate-900 mb-4">Stage History</h2>
-        {/* TODO [Challenge 4]: Fetch stage history from GET /api/deals/:id/history */}
+        {/* TODO [Challenge 7]: Fetch stage history from GET /api/deals/:id/history */}
         {/* Display a timeline of stage transitions with timestamps and user info */}
         <p className="text-slate-500">Stage history not yet implemented.</p>
       </div>

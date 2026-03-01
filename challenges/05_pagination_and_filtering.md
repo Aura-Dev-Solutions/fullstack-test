@@ -1,4 +1,4 @@
-# Challenge 3: Pagination and Advanced Filtering (25 points - Critical)
+# Challenge 5: Pagination and Advanced Filtering (25 points - Critical)
 
 **Estimated Time:** 2-3 hours
 **Technical Difficulty:** Hard

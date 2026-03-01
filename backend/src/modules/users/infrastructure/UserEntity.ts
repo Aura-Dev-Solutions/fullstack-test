@@ -23,7 +23,7 @@ export class UserEntity {
   @JoinColumn({ name: 'organization_id' })
   organization: OrganizationEntity | null
 
-  // TODO [Challenge 5]: Add role column
+  // TODO [Challenge 6]: Add role column
   // @Column({ default: 'member' })
   // role: UserRole
 

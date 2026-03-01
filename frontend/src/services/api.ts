@@ -12,7 +12,7 @@ class ApiError extends Error {
   }
 }
 
-// TODO [Challenge 1]: Add a 401 response interceptor that attempts token refresh before failing the request
+// TODO [Challenge 3]: Add a 401 response interceptor that attempts token refresh before failing the request
 async function request<T>(
   endpoint: string,
   options: RequestInit = {}

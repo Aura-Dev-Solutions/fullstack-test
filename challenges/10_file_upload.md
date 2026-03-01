@@ -1,4 +1,4 @@
-# Challenge 8: File Upload System (10 points - Low)
+# Challenge 10: File Upload System (10 points - Low)
 
 **Estimated Time:** 1.5-2 hours
 **Technical Difficulty:** Medium

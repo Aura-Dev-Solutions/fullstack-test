@@ -12,7 +12,7 @@ export interface PaginationOptions {
 
 export interface FilterOptions {
   [field: string]: string | number | boolean | undefined
-  // TODO [Challenge 3]: Add support for operators (contains, gt, lt, between)
+  // TODO [Challenge 5]: Add support for operators (contains, gt, lt, between)
 }
 
 export interface PaginatedResult<T> {

@@ -11,4 +11,4 @@ export interface CreateUserDTO {
   email: string
 }
 
-export type UserRole = 'admin' | 'member' // TODO [Challenge 5]: Extend with additional roles as needed
+export type UserRole = 'admin' | 'member' // TODO [Challenge 6]: Extend with additional roles as needed

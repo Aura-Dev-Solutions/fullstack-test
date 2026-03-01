@@ -1,4 +1,4 @@
-# Challenge 10: Feature Design & Implementation (15 points - High)
+# Challenge 2: Feature Design & Implementation (15 points - High)
 
 **Estimated Time:** 2-3 hours
 **Technical Difficulty:** Hard

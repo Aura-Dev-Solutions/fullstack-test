@@ -1,4 +1,4 @@
-# Challenge 6: Dashboard Analytics (15 points - Medium)
+# Challenge 8: Dashboard Analytics (15 points - Medium)
 
 **Estimated Time:** 1.5-2 hours
 **Technical Difficulty:** Medium

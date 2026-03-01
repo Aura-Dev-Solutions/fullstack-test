@@ -1,4 +1,4 @@
-# Challenge 7: Code Audit & Bug Fixes (15 points - High)
+# Challenge 1: Code Audit & Bug Fixes (15 points - High)
 
 **Estimated Time:** 1.5-2 hours
 **Technical Difficulty:** Hard

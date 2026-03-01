@@ -1,4 +1,4 @@
-# Challenge 2: Robust Data Validation & Error Handling (20 points - High)
+# Challenge 4: Robust Data Validation & Error Handling (20 points - High)
 
 **Estimated Time:** 2-3 hours
 **Technical Difficulty:** Medium

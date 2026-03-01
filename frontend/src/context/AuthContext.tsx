@@ -18,7 +18,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // TODO [Challenge 1]: Validate token expiration on init. If the stored token is expired, call the refresh endpoint instead of restoring the session directly.
+    // TODO [Challenge 3]: Validate token expiration on init. If the stored token is expired, call the refresh endpoint instead of restoring the session directly.
     const storedToken = authService.getToken()
     const storedUser = localStorage.getItem('user')
 
@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(JSON.parse(storedUser))
     }
     setIsLoading(false)
-    // TODO [Challenge 1]: Implement automatic token refresh using a setInterval or timeout before token expiration
+    // TODO [Challenge 3]: Implement automatic token refresh using a setInterval or timeout before token expiration
   }, [])
 
   const login = (newToken: string, newUser: User) => {
@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('user', JSON.stringify(newUser))
     setToken(newToken)
     setUser(newUser)
-    // TODO [Challenge 1]: Store the refresh token and set up automatic access token renewal before expiration
+    // TODO [Challenge 3]: Store the refresh token and set up automatic access token renewal before expiration
   }
 
   const logout = () => {

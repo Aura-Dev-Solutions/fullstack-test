@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import type { AuthToken, TokenGenerator, TokenPayload } from '../domain'
 
+// TODO [Challenge 1]: Add a generateRefreshToken() method that creates a longer-lived token (e.g., 30 days)
 export class JwtTokenGenerator implements TokenGenerator {
   private readonly expiresInMs = 24 * 60 * 60 * 1000 // 24 hours
 
@@ -29,4 +30,6 @@ export class JwtTokenGenerator implements TokenGenerator {
       return null
     }
   }
+
+  // TODO [Challenge 1]: Add token revocation support — verify against a blocklist in DB or use a short-lived access token + refresh token strategy
 }

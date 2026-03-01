@@ -1,5 +1,5 @@
 /**
- * Pagination interfaces for Challenge 3: Pagination and Advanced Filtering
+ * Pagination interfaces for Challenge 5: Pagination and Advanced Filtering
  * Use these types when implementing paginated endpoints.
  */
 

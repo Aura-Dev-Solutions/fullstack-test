@@ -1,4 +1,5 @@
 import { useEffect, useState, type DragEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { dealService, workflowService, contactService, type Deal, type Stage, type Contact } from '../services'
 
 type ViewMode = 'kanban' | 'table'
@@ -291,7 +292,7 @@ export function DealsPage() {
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-medium text-slate-900">{deal.title}</h4>
+                      <Link to={`/deals/${deal.id}`} className="font-medium text-slate-900 hover:text-indigo-600 hover:underline">{deal.title}</Link>
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium shrink-0 ${
                         deal.status === 'won' ? 'bg-green-100 text-green-700' :
                         deal.status === 'lost' ? 'bg-red-100 text-red-700' :
@@ -355,7 +356,7 @@ export function DealsPage() {
               <tbody className="divide-y divide-slate-100">
                 {deals.map((deal) => (
                   <tr key={deal.id} className="hover:bg-slate-50">
-                    <td className="px-6 py-4 text-slate-900 font-medium">{deal.title}</td>
+                    <td className="px-6 py-4 font-medium"><Link to={`/deals/${deal.id}`} className="text-slate-900 hover:text-indigo-600 hover:underline">{deal.title}</Link></td>
                     <td className="px-6 py-4 text-slate-600">${deal.value.toLocaleString()}</td>
                     <td className="px-6 py-4 text-slate-600">{getContactName(deal.contactId) || '-'}</td>
                     <td className="px-6 py-4">

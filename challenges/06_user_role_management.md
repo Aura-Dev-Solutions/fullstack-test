@@ -39,7 +39,7 @@ The current system doesn't differentiate between user roles:
    - Conditionally render UI elements based on user role (e.g., hide admin actions from members)
    - Provide clear feedback when access is denied
 
-**Note:** If implementing both Challenge 1 and Challenge 5, design Challenge 1 with role extensibility in mind (add a `role` field to the JWT payload from the start).
+**Note:** If implementing both Challenge 3 and Challenge 6, design Challenge 3 with role extensibility in mind (add a `role` field to the JWT payload from the start).
 
 ### Relevant Files
 - `backend/src/modules/users/domain/User.ts`

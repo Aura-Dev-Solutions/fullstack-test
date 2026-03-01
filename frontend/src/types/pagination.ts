@@ -1,5 +1,5 @@
 /**
- * Pagination types for Challenge 3: Pagination and Advanced Filtering
+ * Pagination types for Challenge 5: Pagination and Advanced Filtering
  * These mirror the backend's Pagination interfaces.
  */
 

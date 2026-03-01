@@ -114,9 +114,9 @@ export function createApp(dataSource: DataSource): Express {
 
   // Routes (public)
   app.use('/api/auth', createAuthRoutes(authController))
+  app.use('/api/users', createUserRoutes(userController))
 
   // Routes (protected - require auth)
-  app.use('/api/users', createUserRoutes(userController, authMiddleware))
   app.use('/api/organizations', createOrganizationRoutes(organizationController, authMiddleware))
   app.use('/api/contacts', createContactRoutes(contactController, authMiddleware))
   app.use('/api/workflows', createWorkflowRoutes(workflowController, authMiddleware))

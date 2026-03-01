@@ -16,6 +16,8 @@ export class DealUseCases {
   }
 
   async updateDeal(id: string, data: UpdateDealDTO): Promise<Deal | null> {
+    // NOTE: Stage changes are not currently tracked.
+    // TODO [Challenge 4]: If data.stageId !== existingDeal.stageId, create a DealStageHistory record with stageId, previousStageId, changedAt timestamp, and changedBy userId
     return this.dealRepository.update(id, data)
   }
 
